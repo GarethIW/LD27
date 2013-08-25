@@ -175,7 +175,9 @@ namespace LD27
 
                 if ((cks.IsKeyDown(Keys.Space) && !lks.IsKeyDown(Keys.Space)) || (cgs.Buttons.B==ButtonState.Pressed && lgs.Buttons.B!=ButtonState.Pressed)) gameHero.TryPlantBomb(currentRoom);
                 if (cks.IsKeyDown(Keys.Z) || cks.IsKeyDown(Keys.Enter) || cgs.Buttons.A == ButtonState.Pressed) gameHero.DoAttack();
-                if (cks.IsKeyDown(Keys.X) || cks.IsKeyDown(Keys.RightShift) || cgs.Buttons.X == ButtonState.Pressed) gameHero.DoDefend(true); else gameHero.DoDefend(false);
+
+                if (cks.IsKeyDown(Keys.X) || cks.IsKeyDown(Keys.RightShift) || cgs.Buttons.X == ButtonState.Pressed) gameHero.DoDefend(true, virtualJoystick); else gameHero.DoDefend(false, virtualJoystick);
+                
 
 
                 int openCount = 0;

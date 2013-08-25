@@ -75,7 +75,9 @@ namespace LD27
                     currentFrame++;
                     if (currentFrame == 4) currentFrame = 0;
                 }
-                Rotation = Helper.TurnToFace(v2pos, v2pos + (v2speed * 50f), Rotation, 1f, 0.5f);
+
+                if(!defending)
+                    Rotation = Helper.TurnToFace(v2pos, v2pos + (v2speed * 50f), Rotation, 1f, 0.5f);
             }
 
             if (Position.X < doors[3].Position.X) { RoomX--; Position = doors[1].Position + new Vector3(0f, 0f, 4f); ResetDoors(doors, ref rooms); }
@@ -191,7 +193,7 @@ namespace LD27
             attackDir = 1;
         }
 
-        public void DoDefend(bool def)
+        public void DoDefend(bool def, Vector2 virtualJoystick)
         {
             if (!def) defending = false;
             if (!attacking && def)
@@ -203,7 +205,11 @@ namespace LD27
         public void Move(Vector2 virtualJoystick)
         {
             Vector3 dir = new Vector3(virtualJoystick, 0f);
-            Speed = dir * moveSpeed;
+
+            if (!defending)
+                Speed = dir * moveSpeed;
+            else
+                Speed = dir * (moveSpeed * 0.66f);
         }
 
 
