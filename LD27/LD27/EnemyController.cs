@@ -70,10 +70,10 @@ namespace LD27
                     Enemies.Add(new Sentinel(pos, room, spriteSheets["Sentinel"]));
                     break;
                 case EnemyType.Head:
-                    Enemies.Add(new Sentinel(pos, room, spriteSheets["Head"]));
+                    Enemies.Add(new Head(pos, room, spriteSheets["Head"]));
                     break;
                 case EnemyType.Ooze:
-                    Enemies.Add(new Sentinel(pos, room, spriteSheets["Ooze"]));
+                    Enemies.Add(new Ooze(pos, room, spriteSheets["Ooze"]));
                     break;
             }
         }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LD27.Enemies
+namespace LD27
 {
     /// <summary>
     /// The 'head' of @MattDrivenDev
