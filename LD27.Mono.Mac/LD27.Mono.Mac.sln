@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LD27.Mono.Mac", "LD27.Mono.Mac.csproj", "{3D29A1A3-30A1-46C9-8560-336D97A3AFD3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+		AppStore|x86 = AppStore|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D29A1A3-30A1-46C9-8560-336D97A3AFD3}.AppStore|x86.ActiveCfg = AppStore|x86
+		{3D29A1A3-30A1-46C9-8560-336D97A3AFD3}.AppStore|x86.Build.0 = AppStore|x86
+		{3D29A1A3-30A1-46C9-8560-336D97A3AFD3}.Debug|x86.ActiveCfg = Debug|x86
+		{3D29A1A3-30A1-46C9-8560-336D97A3AFD3}.Debug|x86.Build.0 = Debug|x86
+		{3D29A1A3-30A1-46C9-8560-336D97A3AFD3}.Release|x86.ActiveCfg = Release|x86
+		{3D29A1A3-30A1-46C9-8560-336D97A3AFD3}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = LD27.Mono.Mac.csproj
+	EndGlobalSection
+EndGlobal

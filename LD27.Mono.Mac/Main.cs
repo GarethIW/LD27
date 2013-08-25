@@ -26,11 +26,12 @@ namespace LD27.Mono.Mac
 
 	class AppDelegate : NSApplicationDelegate
 	{
-		Game1 game;
+		LD27Game game;
 
 		public override void FinishedLaunching (MonoMac.Foundation.NSObject notification)
 		{
-			game = new Game1 ();
+			game = new LD27Game ();
+			game.Window.Title = "10 Seconds";
 			game.Run ();
 		}
 

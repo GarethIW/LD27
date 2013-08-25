@@ -43,19 +43,19 @@ namespace LD27
         public void LoadContent(ContentManager content)
         {
             VoxelSprite manhack = new VoxelSprite(16,16,16);
-            LoadVoxels.LoadSprite(Path.Combine(content.RootDirectory, "enemies\\manhack.vxs"), ref manhack);
+            LoadVoxels.LoadSprite(Path.Combine(content.RootDirectory, "enemies", "manhack.vxs"), ref manhack);
             spriteSheets.Add("Manhack", manhack);
 
             VoxelSprite sentinel = new VoxelSprite(16,16,16);
-            LoadVoxels.LoadSprite(Path.Combine(content.RootDirectory, "enemies\\sentinel.vxs"), ref sentinel);
+            LoadVoxels.LoadSprite(Path.Combine(content.RootDirectory, "enemies", "sentinel.vxs"), ref sentinel);
             spriteSheets.Add("Sentinel", sentinel);
 
             VoxelSprite head = new VoxelSprite(16, 16, 16);
-            LoadVoxels.LoadSprite(Path.Combine(content.RootDirectory, "enemies\\head.vxs"), ref head);
+            LoadVoxels.LoadSprite(Path.Combine(content.RootDirectory, "enemies", "head.vxs"), ref head);
             spriteSheets.Add("Head", head);
 
             VoxelSprite ooze = new VoxelSprite(16, 16, 16);
-            LoadVoxels.LoadSprite(Path.Combine(content.RootDirectory, "enemies\\ooze.vxs"), ref ooze);
+            LoadVoxels.LoadSprite(Path.Combine(content.RootDirectory, "enemies", "ooze.vxs"), ref ooze);
             spriteSheets.Add("Ooze", ooze);
         }
 

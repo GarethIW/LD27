@@ -11,6 +11,7 @@
     <RootNamespace>LD27.Mono.Mac</RootNamespace>
     <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
     <AssemblyName>LD27.Mono.Mac</AssemblyName>
+    <SuppressXamMacUpsell>True</SuppressXamMacUpsell>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -69,16 +70,168 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="MonoMac" />
-    <Reference Include="MonoGame.Framework" />
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\..\MonoGame\MonoGame.Framework\bin\MacOS\Distribution\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Lidgren.Network">
+      <HintPath>..\..\MonoGame\MonoGame.Framework\bin\MacOS\Distribution\Lidgren.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="Tao.Sdl">
+      <HintPath>..\..\MonoGame\MonoGame.Framework\bin\MacOS\Distribution\Tao.Sdl.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game1.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\LD27\LD27\AudioController.cs">
+      <Link>AudioController.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Bomb.cs">
+      <Link>Bomb.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\BombController.cs">
+      <Link>BombController.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Camera.cs">
+      <Link>Camera.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Door.cs">
+      <Link>Door.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\EnemyController.cs">
+      <Link>EnemyController.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Helper.cs">
+      <Link>Helper.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Hero.cs">
+      <Link>Hero.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\LD27Game.cs">
+      <Link>LD27Game.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Particle.cs">
+      <Link>Particle.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\ParticleController.cs">
+      <Link>ParticleController.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\ParticleCube.cs">
+      <Link>ParticleCube.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Program.cs">
+      <Link>Program.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Projectile.cs">
+      <Link>Projectile.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\ProjectileController.cs">
+      <Link>ProjectileController.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Room.cs">
+      <Link>Room.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\RoomShift.cs">
+      <Link>RoomShift.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Enemies\Enemy.cs">
+      <Link>Enemies\Enemy.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Enemies\Head.cs">
+      <Link>Enemies\Head.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Enemies\Manhack.cs">
+      <Link>Enemies\Manhack.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Enemies\Ooze.cs">
+      <Link>Enemies\Ooze.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Enemies\Sentinel.cs">
+      <Link>Enemies\Sentinel.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Voxel\AnimChunk.cs">
+      <Link>Voxel\AnimChunk.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Voxel\Chunk.cs">
+      <Link>Voxel\Chunk.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Voxel\LoadSave.cs">
+      <Link>Voxel\LoadSave.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Voxel\SpriteVoxel.cs">
+      <Link>Voxel\SpriteVoxel.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Voxel\VertexPositionNormalColor.cs">
+      <Link>Voxel\VertexPositionNormalColor.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Voxel\Voxel.cs">
+      <Link>Voxel\Voxel.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Voxel\VoxelSprite.cs">
+      <Link>Voxel\VoxelSprite.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\Voxel\VoxelWorld.cs">
+      <Link>Voxel\VoxelWorld.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
-    <None Include="Content\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Content\" />
+    <Folder Include="Enemies\" />
+    <Folder Include="Voxel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\door.vxs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\dude.vxs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\dynamic.vxs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\font.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\projectiles.vxs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\roomicon.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\tiles.vxs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\enemies\head.vxs">
+      <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\enemies\manhack.vxs">
+      <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\enemies\ooze.vxs">
+      <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\enemies\sentinel.vxs">
+      <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\audio\sfx\roomclunk.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\audio\sfx\roomscrape.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\MonoGame.icns" />
+  </ItemGroup>
 </Project>
