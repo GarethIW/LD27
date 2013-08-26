@@ -13,8 +13,12 @@ namespace LD27
         public Manhack(Vector3 pos, Room room, VoxelSprite sprite)
             : base(pos, room, sprite)
         {
+            Type = EnemyType.Manhack;
+            
             Position.Z -= 2f;
             animTargetTime = 30f;
+
+            Health = 50f;
         }
 
         public override void Update(GameTime gameTime, Room currentRoom, Hero gameHero, List<Door> doors)
@@ -54,6 +58,8 @@ namespace LD27
 
             if (knockbackTime > 0) knockbackTime -= gameTime.ElapsedGameTime.TotalMilliseconds;
 
+            if (hitAlpha > 0f) hitAlpha -= 0.1f;
+
             if (Health <= 0f) Die();
 
         }
@@ -74,7 +80,7 @@ namespace LD27
 
             Health -= damage;
 
-
+            hitAlpha = 1f;
         }
 
         public override void DoCollide(bool x, bool y, bool z, Vector3 checkPosition, Room currentRoom, Hero gameHero, bool withPlayer)

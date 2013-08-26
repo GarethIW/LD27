@@ -161,8 +161,8 @@ namespace LD27
 
                 Vector2 virtualJoystick = Vector2.Zero;
                 if (cks.IsKeyDown(Keys.W) || cks.IsKeyDown(Keys.Up)) virtualJoystick.Y = -1;
-                if (cks.IsKeyDown(Keys.S) || cks.IsKeyDown(Keys.Left)) virtualJoystick.X = -1;
-                if (cks.IsKeyDown(Keys.A) || cks.IsKeyDown(Keys.Down)) virtualJoystick.Y = 1;
+                if (cks.IsKeyDown(Keys.A) || cks.IsKeyDown(Keys.Left)) virtualJoystick.X = -1;
+                if (cks.IsKeyDown(Keys.S) || cks.IsKeyDown(Keys.Down)) virtualJoystick.Y = 1;
                 if (cks.IsKeyDown(Keys.D) || cks.IsKeyDown(Keys.Right)) virtualJoystick.X = 1;
                 if(virtualJoystick.Length()>0f) virtualJoystick.Normalize();
                 if (cgs.ThumbSticks.Left.Length() > 0.1f)
@@ -451,7 +451,7 @@ namespace LD27
 
             currentRoom = Rooms[gameHero.RoomX, gameHero.RoomY];
 
-           
+            enemyController.Enemies.RemoveAll(en => en.Room == currentRoom);
 
             gameCamera.Target = new Vector3((currentRoom.World.X_SIZE * Voxel.SIZE) / 2, (currentRoom.World.Y_SIZE * Voxel.SIZE) / 2, 0f);
 

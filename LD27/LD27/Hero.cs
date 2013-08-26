@@ -38,7 +38,12 @@ namespace LD27
         int attackDir;
         int attackFrame = 0;
 
+
         bool defending = false;
+
+        public float hitAlpha = 0f;
+        
+
 
         public Hero(int startX, int startY, Vector3 pos)
         {
@@ -61,11 +66,17 @@ namespace LD27
 
         public void Update(GameTime gameTime, Camera gameCamera, Room currentRoom, List<Door> doors, ref Room[,] rooms)
         {
+            Vector2 v2pos = new Vector2(Position.X, Position.Y);
+            Vector2 v2speed = new Vector2(Speed.X, Speed.Y);
+            if (Speed.Length() > 0f)
+            {
+                //if (!defending)
+                Rotation = Helper.TurnToFace(v2pos, v2pos + (v2speed * 50f), Rotation, 1f, 0.5f);
+            }
             CheckCollisions(currentRoom.World, doors, currentRoom);
             Position += Speed;
 
-            Vector2 v2pos = new Vector2(Position.X, Position.Y);
-            Vector2 v2speed = new Vector2(Speed.X, Speed.Y);
+            v2speed = new Vector2(Speed.X, Speed.Y);
             if (Speed.Length() > 0f)
             {
                 frameTime += gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -75,10 +86,8 @@ namespace LD27
                     currentFrame++;
                     if (currentFrame == 4) currentFrame = 0;
                 }
-
-                if(!defending)
-                    Rotation = Helper.TurnToFace(v2pos, v2pos + (v2speed * 50f), Rotation, 1f, 0.5f);
             }
+            
 
             if (Position.X < doors[3].Position.X) { RoomX--; Position = doors[1].Position + new Vector3(0f, 0f, 4f); ResetDoors(doors, ref rooms); }
             if (Position.X > doors[1].Position.X) { RoomX++; Position = doors[3].Position + new Vector3(0f, 0f, 4f); ResetDoors(doors, ref rooms); }
@@ -115,7 +124,7 @@ namespace LD27
                         float radiusSweep = 1f;
                         foreach (Enemy e in EnemyController.Instance.Enemies.Where(en => en.Room == currentRoom))
                         {
-                            for (float az = 0f; az > -6f; az -= 1f)
+                            for (float az = 0f; az > -8f; az -= 1f)
                             {
                                 for (float a = Rotation - radiusSweep; a < Rotation + radiusSweep; a += 0.02f)
                                 {
@@ -125,7 +134,7 @@ namespace LD27
 
                                         if (e.boundingSphere.Contains(attackPos) == ContainmentType.Contains && !hit)
                                         {
-                                            e.DoHit(attackPos, new Vector3(Helper.AngleToVector(Rotation, 0.5f), 0f), 10f);
+                                            e.DoHit(attackPos, new Vector3(Helper.AngleToVector(Rotation, 0.01f), 0f), 10f);
                                             hit = true;
                                         }
                                     }
@@ -141,6 +150,9 @@ namespace LD27
                 }
             }
 
+            if (hitAlpha > 0f) hitAlpha -= 0.1f;
+
+
         }
 
         private void ResetDoors(List<Door> doors, ref Room[,] rooms)
@@ -155,7 +167,7 @@ namespace LD27
 
         public void Draw(GraphicsDevice gd, Camera gameCamera)
         {
-
+            drawEffect.DiffuseColor = new Vector3(1f, 1f - hitAlpha, 1f - hitAlpha);
             foreach (EffectPass pass in drawEffect.CurrentTechnique.Passes)
             {
                 pass.Apply();
@@ -209,13 +221,25 @@ namespace LD27
             if (!defending)
                 Speed = dir * moveSpeed;
             else
-                Speed = dir * (moveSpeed * 0.66f);
+                Speed = dir * (moveSpeed * 0.1f);
         }
 
 
         internal void TryPlantBomb(Room currentRoom)
         {
-            BombController.Instance.Spawn(Position + new Vector3(0f, 0f, -3f), currentRoom);
+            if(BombController.Instance.Bombs.Count<3)
+                BombController.Instance.Spawn(Position + new Vector3(0f, 0f, -3f), currentRoom);
+        }
+
+        internal void DoExplosionHit(Vector3 pos, float r)
+        {
+            if (Vector3.Distance(Position, pos) < r)
+            {
+                float dam = (20f / r) * Vector3.Distance(Position, pos);
+                Vector3 speed = (pos - Position);
+                speed.Normalize();
+                DoHit(Position, speed * 0.5f, dam);
+            }
         }
 
         internal bool DoHit(Vector3 pos, Vector3 speed, float damage)
@@ -230,12 +254,15 @@ namespace LD27
 
             if (timeSinceLastHit <= 0)
             {
+                
                 for (int i = 0; i < 4; i++)
                 {
                     ParticleController.Instance.Spawn(pos, speed + new Vector3(-0.05f + ((float)Helper.Random.NextDouble() * 0.1f), -0.05f + ((float)Helper.Random.NextDouble() * 0.1f), -0.05f + ((float)Helper.Random.NextDouble() * 0.1f)), 0.5f, new Color(0.5f + ((float)Helper.Random.NextDouble() * 0.5f), 0f, 0f), 1000, true);
                 }
                 timeSinceLastHit = 100;
             }
+
+            hitAlpha = 1f;
 
             return true;
         }

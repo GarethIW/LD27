@@ -13,6 +13,8 @@ namespace LD27
         public Sentinel(Vector3 pos, Room room, VoxelSprite sprite)
             : base(pos, room, sprite)
         {
+            Type = EnemyType.Sentinel;
+
             animTargetTime = 100;
             numFrames = 5;
             offsetFrame = 1;
@@ -69,6 +71,8 @@ namespace LD27
                 if (Room.World.GetVoxel(new Vector3(Position.X, Position.Y, z)).Active) { groundHeight = z; break; }
             }
 
+            if (hitAlpha > 0f) hitAlpha -= 0.1f;
+
             if (Health <= 0f) Die();
         }
 
@@ -79,6 +83,8 @@ namespace LD27
                 Color c = new Color(new Vector3(1.0f, (float)Helper.Random.NextDouble(), 0.0f)) * (0.7f + ((float)Helper.Random.NextDouble() * 0.3f));
                 ParticleController.Instance.Spawn(Position, new Vector3(-0.1f + ((float)Helper.Random.NextDouble() * 0.2f), -0.1f + ((float)Helper.Random.NextDouble() * 0.2f), -0.1f + ((float)Helper.Random.NextDouble() * 0.2f)), 0.25f, c, 1000, true);
             }
+
+            hitAlpha = 1f;
 
             Health -= damage;
 
