@@ -70,14 +70,14 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="MonoMac" />
-    <Reference Include="MonoGame.Framework">
-      <HintPath>..\..\MonoGame\MonoGame.Framework\bin\MacOS\Distribution\MonoGame.Framework.dll</HintPath>
-    </Reference>
     <Reference Include="Lidgren.Network">
-      <HintPath>..\..\MonoGame\MonoGame.Framework\bin\MacOS\Distribution\Lidgren.Network.dll</HintPath>
+      <HintPath>..\..\MonoGame\MonoGame.Framework\bin\MacOS\Debug\Lidgren.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\..\MonoGame\MonoGame.Framework\bin\MacOS\Debug\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Tao.Sdl">
-      <HintPath>..\..\MonoGame\MonoGame.Framework\bin\MacOS\Distribution\Tao.Sdl.dll</HintPath>
+      <HintPath>..\..\MonoGame\MonoGame.Framework\bin\MacOS\Debug\Tao.Sdl.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +182,7 @@
     <Folder Include="Content\" />
     <Folder Include="Enemies\" />
     <Folder Include="Voxel\" />
+    <Folder Include="Content\audio\sfx\raw\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\door.vxs">

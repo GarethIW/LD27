@@ -108,7 +108,7 @@ namespace LD27
                     if(!e.attacking)
                         graphicsDevice.DrawUserIndexedPrimitives<VertexPositionNormalColor>(PrimitiveType.TriangleList, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame].VertexArray, 0, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame].VertexArray.Length, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame].IndexArray, 0, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame].VertexArray.Length / 2);
                     else
-                        graphicsDevice.DrawUserIndexedPrimitives<VertexPositionNormalColor>(PrimitiveType.TriangleList, e.spriteSheet.AnimChunks[e.numFrames + e.offsetFrame + e.attackFrame].VertexArray, 0, e.spriteSheet.AnimChunks[e.numFrames + e.offsetFrame + e.attackFrame].VertexArray.Length, e.spriteSheet.AnimChunks[e.numFrames + e.offsetFrame + e.attackFrame].IndexArray, 0, e.spriteSheet.AnimChunks[e.numFrames + e.offsetFrame + e.attackFrame].VertexArray.Length / 2);
+                         graphicsDevice.DrawUserIndexedPrimitives<VertexPositionNormalColor>(PrimitiveType.TriangleList, e.spriteSheet.AnimChunks[e.numFrames + e.offsetFrame + e.attackFrame].VertexArray, 0, e.spriteSheet.AnimChunks[e.numFrames + e.offsetFrame + e.attackFrame].VertexArray.Length, e.spriteSheet.AnimChunks[e.numFrames + e.offsetFrame + e.attackFrame].IndexArray, 0, e.spriteSheet.AnimChunks[e.numFrames + e.offsetFrame + e.attackFrame].VertexArray.Length / 2);
 
 
                 }
