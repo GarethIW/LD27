@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Spatium Secondorum Decum")]
-[assembly: AssemblyProduct("LD27")]
+[assembly: AssemblyTitle("SpatiumSecondorumDecum")]
+[assembly: AssemblyProduct("LD27.Mono.Linux")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("6e1edeb0-7373-482f-aa3a-a169a5c14dc3")]
+[assembly: Guid("cff02612-30e2-4ca6-8ecd-b0668c368034")]
 
 // Version information for an assembly consists of the following four values:
 //

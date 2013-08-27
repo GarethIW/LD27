@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LD27Content", "LD27\LD27Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LD27.Mono.Windows", "LD27.Mono.Windows\LD27.Mono.Windows.csproj", "{A7B7D633-5184-421C-B50B-1C84AF979035}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LD27.Mono.Linux", "LD27.Mono.Linux\LD27.Mono.Linux.csproj", "{7B620BFB-0755-4975-9445-A7A23776C13C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -23,6 +25,10 @@ Global
 		{A7B7D633-5184-421C-B50B-1C84AF979035}.Debug|x86.Build.0 = Debug|x86
 		{A7B7D633-5184-421C-B50B-1C84AF979035}.Release|x86.ActiveCfg = Release|x86
 		{A7B7D633-5184-421C-B50B-1C84AF979035}.Release|x86.Build.0 = Release|x86
+		{7B620BFB-0755-4975-9445-A7A23776C13C}.Debug|x86.ActiveCfg = Debug|x86
+		{7B620BFB-0755-4975-9445-A7A23776C13C}.Debug|x86.Build.0 = Debug|x86
+		{7B620BFB-0755-4975-9445-A7A23776C13C}.Release|x86.ActiveCfg = Release|x86
+		{7B620BFB-0755-4975-9445-A7A23776C13C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

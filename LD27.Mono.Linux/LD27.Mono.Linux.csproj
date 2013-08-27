@@ -5,30 +5,20 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A7B7D633-5184-421C-B50B-1C84AF979035}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{7B620BFB-0755-4975-9445-A7A23776C13C}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LD27</RootNamespace>
-<<<<<<< .merge_file_xS5ipj
-    <AssemblyName>LD27</AssemblyName>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
-=======
-    <AssemblyName>SpatiumSecondorumDecem</AssemblyName>
     <AssemblyName>SpatiumSecondorumDecum</AssemblyName>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
->>>>>>> .merge_file_GZ7AyB
     <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\WindowsGL\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;WINDOWS;OPENGL</DefineConstants>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;LINUX</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -36,19 +26,13 @@
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\WindowsGL\Release\</OutputPath>
-    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;LINUX</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-<<<<<<< .merge_file_xS5ipj
     <ApplicationIcon>Icon.ico</ApplicationIcon>
-=======
-    <ApplicationIcon>
-    </ApplicationIcon>
->>>>>>> .merge_file_GZ7AyB
-    <ApplicationIcon>SSD.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\LD27\LD27\AudioController.cs">
@@ -66,19 +50,19 @@
     <Compile Include="..\LD27\LD27\Door.cs">
       <Link>Door.cs</Link>
     </Compile>
-    <Compile Include="..\LD27\LD27\Enemies\Enemy.cs">
+    <Compile Include="..\ld27\ld27\enemies\Enemy.cs">
       <Link>Enemies\Enemy.cs</Link>
     </Compile>
-    <Compile Include="..\LD27\LD27\Enemies\Head.cs">
+    <Compile Include="..\ld27\ld27\enemies\Head.cs">
       <Link>Enemies\Head.cs</Link>
     </Compile>
-    <Compile Include="..\LD27\LD27\Enemies\Manhack.cs">
+    <Compile Include="..\ld27\ld27\enemies\Manhack.cs">
       <Link>Enemies\Manhack.cs</Link>
     </Compile>
-    <Compile Include="..\LD27\LD27\Enemies\Ooze.cs">
+    <Compile Include="..\ld27\ld27\enemies\Ooze.cs">
       <Link>Enemies\Ooze.cs</Link>
     </Compile>
-    <Compile Include="..\LD27\LD27\Enemies\Sentinel.cs">
+    <Compile Include="..\ld27\ld27\enemies\Sentinel.cs">
       <Link>Enemies\Sentinel.cs</Link>
     </Compile>
     <Compile Include="..\LD27\LD27\EnemyController.cs">
@@ -120,28 +104,28 @@
     <Compile Include="..\LD27\LD27\RoomShift.cs">
       <Link>RoomShift.cs</Link>
     </Compile>
-    <Compile Include="..\LD27\LD27\Voxel\AnimChunk.cs">
+    <Compile Include="..\ld27\ld27\voxel\AnimChunk.cs">
       <Link>Voxel\AnimChunk.cs</Link>
     </Compile>
-    <Compile Include="..\LD27\LD27\Voxel\Chunk.cs">
+    <Compile Include="..\ld27\ld27\voxel\Chunk.cs">
       <Link>Voxel\Chunk.cs</Link>
     </Compile>
-    <Compile Include="..\LD27\LD27\Voxel\LoadSave.cs">
+    <Compile Include="..\ld27\ld27\voxel\LoadSave.cs">
       <Link>Voxel\LoadSave.cs</Link>
     </Compile>
-    <Compile Include="..\LD27\LD27\Voxel\SpriteVoxel.cs">
+    <Compile Include="..\ld27\ld27\voxel\SpriteVoxel.cs">
       <Link>Voxel\SpriteVoxel.cs</Link>
     </Compile>
-    <Compile Include="..\LD27\LD27\Voxel\VertexPositionNormalColor.cs">
+    <Compile Include="..\ld27\ld27\voxel\VertexPositionNormalColor.cs">
       <Link>Voxel\VertexPositionNormalColor.cs</Link>
     </Compile>
-    <Compile Include="..\LD27\LD27\Voxel\Voxel.cs">
+    <Compile Include="..\ld27\ld27\voxel\Voxel.cs">
       <Link>Voxel\Voxel.cs</Link>
     </Compile>
-    <Compile Include="..\LD27\LD27\Voxel\VoxelSprite.cs">
+    <Compile Include="..\ld27\ld27\voxel\VoxelSprite.cs">
       <Link>Voxel\VoxelSprite.cs</Link>
     </Compile>
-    <Compile Include="..\LD27\LD27\Voxel\VoxelWorld.cs">
+    <Compile Include="..\ld27\ld27\voxel\VoxelWorld.cs">
       <Link>Voxel\VoxelWorld.cs</Link>
     </Compile>
     <Compile Include="Program.cs" />
@@ -150,46 +134,196 @@
   <ItemGroup>
     <Reference Include="Lidgren.Network, Version=2011.3.12.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\WindowsGL\Debug\Lidgren.Network.dll</HintPath>
+      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\Linux\Debug\Lidgren.Network.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Framework, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\WindowsGL\Debug\MonoGame.Framework.dll</HintPath>
+      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\Linux\Debug\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\WindowsGL\Debug\OpenTK.dll</HintPath>
+      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\Linux\Debug\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.XML" />
+    <Reference Include="System.Xml" />
     <Reference Include="Tao.Sdl, Version=1.2.13.0, Culture=neutral, PublicKeyToken=9c7a200e36c0094e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\WindowsGL\Debug\Tao.Sdl.dll</HintPath>
+      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\Linux\Debug\Tao.Sdl.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
-    <Content Include="SSD.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\music\game.xnb">
+      <Link>Content\audio\music\game.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\enemies\manhack.vxs">
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\acid_hit.xnb">
+      <Link>Content\audio\sfx\acid_hit.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\bomb_place.xnb">
+      <Link>Content\audio\sfx\bomb_place.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\collect_health.xnb">
+      <Link>Content\audio\sfx\collect_health.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\defend.xnb">
+      <Link>Content\audio\sfx\defend.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\deflect.xnb">
+      <Link>Content\audio\sfx\deflect.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\door.xnb">
+      <Link>Content\audio\sfx\door.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\explosion1.xnb">
+      <Link>Content\audio\sfx\explosion1.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\explosion2.xnb">
+      <Link>Content\audio\sfx\explosion2.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\face_die.xnb">
+      <Link>Content\audio\sfx\face_die.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\face_gun.xnb">
+      <Link>Content\audio\sfx\face_gun.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\face_missile.xnb">
+      <Link>Content\audio\sfx\face_missile.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\face_open.xnb">
+      <Link>Content\audio\sfx\face_open.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\flesh_hit.xnb">
+      <Link>Content\audio\sfx\flesh_hit.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\gatling_deflect.xnb">
+      <Link>Content\audio\sfx\gatling_deflect.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\metal_hit.xnb">
+      <Link>Content\audio\sfx\metal_hit.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\ooze_die.xnb">
+      <Link>Content\audio\sfx\ooze_die.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\ooze_spit.xnb">
+      <Link>Content\audio\sfx\ooze_spit.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\ooze_split.xnb">
+      <Link>Content\audio\sfx\ooze_split.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\player_hit.xnb">
+      <Link>Content\audio\sfx\player_hit.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\roomclunk.xnb">
+      <Link>Content\audio\sfx\roomclunk.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\roomscrape.xnb">
+      <Link>Content\audio\sfx\roomscrape.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\sentinel_shoot.xnb">
+      <Link>Content\audio\sfx\sentinel_shoot.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\sword.xnb">
+      <Link>Content\audio\sfx\sword.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27content\enemies\head.vxs">
+      <Link>Content\enemies\head.vxs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\enemies\manhack.vxs">
       <Link>Content\enemies\manhack.vxs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\enemies\sentinel.vxs">
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27content\enemies\ooze.vxs">
+      <Link>Content\enemies\ooze.vxs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\enemies\sentinel.vxs">
       <Link>Content\enemies\sentinel.vxs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\roomclunk.xnb">
-      <Link>Content\audio\sfx\roomclunk.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\roomscrape.xnb">
-      <Link>Content\audio\sfx\roomscrape.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="..\LD27\LD27\bin\x86\Debug\Content\door.vxs">
       <Link>Content\door.vxs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -206,98 +340,24 @@
       <Link>Content\font.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\roomicon.xnb">
-      <Link>Content\roomicon.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\tiles.vxs">
-      <Link>Content\tiles.vxs</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\projectiles.vxs">
-      <Link>Content\projectiles.vxs</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\LD27\LD27Content\enemies\head.vxs">
-      <Link>Content\enemies\head.vxs</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27Content\enemies\ooze.vxs">
-      <Link>Content\enemies\ooze.vxs</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\acid_hit.xnb">
-      <Link>Content\audio\sfx\acid_hit.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\door.xnb">
-      <Link>Content\audio\sfx\door.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\explosion1.xnb">
-      <Link>Content\audio\sfx\explosion1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\explosion2.xnb">
-      <Link>Content\audio\sfx\explosion2.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\face_die.xnb">
-      <Link>Content\audio\sfx\face_die.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\face_gun.xnb">
-      <Link>Content\audio\sfx\face_gun.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\face_missile.xnb">
-      <Link>Content\audio\sfx\face_missile.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\face_open.xnb">
-      <Link>Content\audio\sfx\face_open.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\flesh_hit.xnb">
-      <Link>Content\audio\sfx\flesh_hit.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\metal_hit.xnb">
-      <Link>Content\audio\sfx\metal_hit.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\ooze_die.xnb">
-      <Link>Content\audio\sfx\ooze_die.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\ooze_spit.xnb">
-      <Link>Content\audio\sfx\ooze_spit.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\sword.xnb">
-      <Link>Content\audio\sfx\sword.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\music\game.xnb">
-      <Link>Content\audio\music\game.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="..\LD27\LD27\bin\x86\Debug\Content\hud.xnb">
       <Link>Content\hud.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\projectiles.vxs">
+      <Link>Content\projectiles.vxs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\roomicon.xnb">
+      <Link>Content\roomicon.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\LD27\LD27\bin\x86\Debug\Content\stingers.xnb">
       <Link>Content\stingers.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\tiles.vxs">
+      <Link>Content\tiles.vxs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\LD27\LD27\bin\x86\Debug\Content\timerfont-large.xnb">
@@ -314,62 +374,6 @@
     </Content>
     <Content Include="..\LD27\LD27\bin\x86\Debug\Content\titlesheet.xnb">
       <Link>Content\titlesheet.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\ooze_split.xnb">
-      <Link>Content\audio\sfx\ooze_split.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\sentinel_shoot.xnb">
-      <Link>Content\audio\sfx\sentinel_shoot.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Lidgren.Network, Version=2011.3.12.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\WindowsGL\Debug\Lidgren.Network.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoGame.Framework, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\WindowsGL\Debug\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\WindowsGL\Debug\OpenTK.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.XML" />
-    <Reference Include="Tao.Sdl, Version=1.2.13.0, Culture=neutral, PublicKeyToken=9c7a200e36c0094e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\MonoGame\v3.0\Assemblies\Tao.Sdl.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\bomb_place.xnb">
-      <Link>Content\audio\sfx\bomb_place.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\collect_health.xnb">
-      <Link>Content\audio\sfx\collect_health.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\defend.xnb">
-      <Link>Content\audio\sfx\defend.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\deflect.xnb">
-      <Link>Content\audio\sfx\deflect.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\gatling_deflect.xnb">
-      <Link>Content\audio\sfx\gatling_deflect.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\player_hit.xnb">
-      <Link>Content\audio\sfx\player_hit.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
