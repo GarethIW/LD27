@@ -13,12 +13,12 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\WindowsGL\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;WINDOWS;OPENGL</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -32,8 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>SSD.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\LD27\LD27\AudioController.cs">
@@ -134,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
+    <Content Include="SSD.ico" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\LD27\LD27\bin\x86\Debug\Content\enemies\manhack.vxs">
@@ -308,7 +308,7 @@
     <Reference Include="System.XML" />
     <Reference Include="Tao.Sdl, Version=1.2.13.0, Culture=neutral, PublicKeyToken=9c7a200e36c0094e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\WindowsGL\Debug\Tao.Sdl.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\MonoGame\v3.0\Assemblies\Tao.Sdl.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
