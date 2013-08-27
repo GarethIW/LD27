@@ -660,7 +660,7 @@ namespace LD27
 
             OpenDoors();
 
-            //AudioController.PlayMusic("0");
+            AudioController.PlayMusic("0");
         }
 #endregion
     }
