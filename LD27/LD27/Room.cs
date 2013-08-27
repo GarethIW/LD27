@@ -32,6 +32,9 @@ namespace LD27
 
                 CreateMap(tileSheet);
             }
+            else IsComplete = true;
+
+            //IsComplete = true;
 
             objectSheet = objects;
         }
@@ -42,7 +45,13 @@ namespace LD27
             if (wallGlow < -0.29f) wallGlowTarget = 0.3f;
             if (wallGlow > 0.29f) wallGlowTarget = -0.3f;
 
-            wallColor = new Color(0.7f + wallGlow, 0f, 0f);
+            if(!IsComplete)
+                wallColor = new Color(0.7f + wallGlow, 0f, 0f);
+            else
+                wallColor = new Color(0f, 0.7f + wallGlow, 0f);
+
+
+            if (EnemyController.Instance.Enemies.Count(en => en.Room == this) == 0) IsComplete = true;
         }
 
         public void Draw(GraphicsDevice gd, Camera gameCamera, BasicEffect drawEffect)
@@ -82,6 +91,8 @@ namespace LD27
                             World.CopySprite(x * Chunk.X_SIZE, y * Chunk.X_SIZE, 14, tileSheet.AnimChunks[0], Helper.Random.Next(4), 0);
                         else
                             World.CopySprite(x * Chunk.X_SIZE, y * Chunk.X_SIZE, 14, tileSheet.AnimChunks[(x == 7 ? 2 : 1)], 0, 0);
+
+                    
                 }
 
 
@@ -97,6 +108,11 @@ namespace LD27
                 World.CopySprite((14 - rx) * Chunk.X_SIZE, ry * Chunk.X_SIZE, 14, tileSheet.AnimChunks[t], 0, 1);
                 World.CopySprite(rx * Chunk.X_SIZE, (8 - ry) * Chunk.X_SIZE, 14, tileSheet.AnimChunks[t], 0, 1);
                 World.CopySprite((14 - rx) * Chunk.X_SIZE, (8 - ry) * Chunk.X_SIZE, 14, tileSheet.AnimChunks[t], 0, 1);
+
+                if(Helper.Random.Next(7)==1) PickupController.Instance.Spawn(PickupType.Health, this, VoxelWorld.ToScreenSpace((rx * Chunk.X_SIZE) + (Chunk.X_SIZE / 2), (ry * Chunk.Y_SIZE) + (Chunk.Y_SIZE / 2), 21));
+                if (Helper.Random.Next(7) == 1) PickupController.Instance.Spawn(PickupType.Health, this, VoxelWorld.ToScreenSpace(((14 - rx) * Chunk.X_SIZE) + (Chunk.X_SIZE / 2), (ry * Chunk.Y_SIZE) + (Chunk.Y_SIZE / 2), 21));
+                if (Helper.Random.Next(7) == 1) PickupController.Instance.Spawn(PickupType.Health, this, VoxelWorld.ToScreenSpace((rx * Chunk.X_SIZE) + (Chunk.X_SIZE / 2), ((8 - ry) * Chunk.Y_SIZE) + (Chunk.Y_SIZE / 2), 21));
+                if (Helper.Random.Next(7) == 1) PickupController.Instance.Spawn(PickupType.Health, this, VoxelWorld.ToScreenSpace(((14 - rx) * Chunk.X_SIZE) + (Chunk.X_SIZE / 2), ((8 - ry) * Chunk.Y_SIZE) + (Chunk.Y_SIZE / 2), 21));
             }
 
             for (int i = 0; i < 1; i++)
@@ -124,21 +140,46 @@ namespace LD27
             //}
 
             int enemiesSpawned = 0;
-            for (int x = 1; x < 14; x++)
-                for (int y = 1; y < 8; y++)
-                {
-                    if (!World.GetVoxel((x * Chunk.X_SIZE) + (Chunk.X_SIZE / 2), (y * Chunk.Y_SIZE) + (Chunk.Y_SIZE / 2), 21).Active)
+            bool headSpawned = false;
+            bool oozeSpawned = false;
+            int numEnemies = 0 + Helper.Random.Next(6);
+            while (enemiesSpawned < numEnemies)
+            {
+                for (int x = 1; x < 14; x++)
+                    for (int y = 1; y < 8; y++)
                     {
-                        // Create an enemy?
-                        if (enemiesSpawned < 4 && Helper.Random.Next(50) == 1)
+                        if (!World.GetVoxel((x * Chunk.X_SIZE) + (Chunk.X_SIZE / 2), (y * Chunk.Y_SIZE) + (Chunk.Y_SIZE / 2), 23).Active)
                         {
-                            enemiesSpawned++;
+                            // Create an enemy?
+                            if (!(x == 7 && y == 4))
+                            {
+                                if (enemiesSpawned < numEnemies && Helper.Random.Next(50) == 1)
+                                {
+                                    
 
-                            EnemyType type = (EnemyType)Helper.Random.Next(Enum.GetValues(typeof(EnemyType)).Length);
-                            EnemyController.Instance.Spawn(type, VoxelWorld.ToScreenSpace((x * Chunk.X_SIZE) + (Chunk.X_SIZE / 2), (y * Chunk.Y_SIZE) + (Chunk.Y_SIZE / 2), 21), this);
+                                    EnemyType type = (EnemyType)Helper.Random.Next(Enum.GetValues(typeof(EnemyType)).Length);
+                                    if (type != EnemyType.Head)
+                                    {
+                                        if (type == EnemyType.Ooze && oozeSpawned) continue;
+                                        if(type== EnemyType.Ooze) oozeSpawned = true;
+
+                                        EnemyController.Instance.Spawn(type, VoxelWorld.ToScreenSpace((x * Chunk.X_SIZE) + (Chunk.X_SIZE / 2), (y * Chunk.Y_SIZE) + (Chunk.Y_SIZE / 2), 21), this);
+                                        enemiesSpawned++;
+                                    }
+                                }
+                            }
+                            if (x == 7 && y == 4)
+                            {
+                                if (enemiesSpawned < numEnemies && !headSpawned && Helper.Random.Next(5) == 1)
+                                {
+                                    enemiesSpawned++;
+                                    EnemyController.Instance.Spawn(EnemyType.Head, VoxelWorld.ToScreenSpace((x * Chunk.X_SIZE) + (Chunk.X_SIZE / 2), (y * Chunk.Y_SIZE) + (Chunk.Y_SIZE / 2), 21), this);
+                                    headSpawned = true;
+                                }
+                            }
                         }
                     }
-                }
+            }
 
             World.UpdateWorldMeshes();
         }

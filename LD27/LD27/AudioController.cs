@@ -16,13 +16,15 @@ namespace LD27
     public static class AudioController
     {
         public static float sfxvolume = 1f;
-        public static float musicvolume = 0.5f;
+        public static float musicvolume = 0.25f;
 
         public static Random randomNumber = new Random();
 
         public static Dictionary<string, SoundEffect> effects;
 
         public static Dictionary<string, SoundEffectInstance> songs;
+
+        public static Dictionary<string, SoundEffectInstance> instances;
 
         static string playingTrack = "";
         static bool isPlaying;
@@ -31,18 +33,46 @@ namespace LD27
 
         public static int currentTrack = 0;
 
+        
+
         public static void LoadContent(ContentManager content)
         {
+            if (isPlaying) songs[currentlyPlaying].Stop();
+
             effects = new Dictionary<string, SoundEffect>();
 
             effects.Add("roomclunk", content.Load<SoundEffect>("audio/sfx/roomclunk"));
             effects.Add("roomscrape", content.Load<SoundEffect>("audio/sfx/roomscrape"));
-           
+            effects.Add("acid_hit", content.Load<SoundEffect>("audio/sfx/acid_hit"));
+            effects.Add("door", content.Load<SoundEffect>("audio/sfx/door"));
+            effects.Add("explosion1", content.Load<SoundEffect>("audio/sfx/explosion1"));
+            effects.Add("explosion2", content.Load<SoundEffect>("audio/sfx/explosion2"));
+            effects.Add("face_open", content.Load<SoundEffect>("audio/sfx/face_open"));
+            effects.Add("face_gun", content.Load<SoundEffect>("audio/sfx/face_gun"));
+            effects.Add("flesh_hit", content.Load<SoundEffect>("audio/sfx/flesh_hit"));
+            effects.Add("face_die", content.Load<SoundEffect>("audio/sfx/face_die"));
+            effects.Add("face_missile", content.Load<SoundEffect>("audio/sfx/face_missile"));
+            effects.Add("sword", content.Load<SoundEffect>("audio/sfx/sword"));
+            effects.Add("ooze_die", content.Load<SoundEffect>("audio/sfx/ooze_die"));
+            effects.Add("ooze_spit", content.Load<SoundEffect>("audio/sfx/ooze_spit"));
+            effects.Add("metal_hit", content.Load<SoundEffect>("audio/sfx/metal_hit"));
+            effects.Add("ooze_split", content.Load<SoundEffect>("audio/sfx/ooze_split"));
+            effects.Add("sentinel_shoot", content.Load<SoundEffect>("audio/sfx/sentinel_shoot"));
+            effects.Add("bomb_place", content.Load<SoundEffect>("audio/sfx/bomb_place"));
+            effects.Add("collect_health", content.Load<SoundEffect>("audio/sfx/collect_health"));
+            effects.Add("defend", content.Load<SoundEffect>("audio/sfx/defend"));
+            effects.Add("deflect", content.Load<SoundEffect>("audio/sfx/deflect"));
+            effects.Add("gatling_deflect", content.Load<SoundEffect>("audio/sfx/gatling_deflect"));
+            effects.Add("player_hit", content.Load<SoundEffect>("audio/sfx/flesh_hit"));
 
-
+            instances = new Dictionary<string, SoundEffectInstance>();
+            instances.Add("roomscrape", effects["roomscrape"].CreateInstance());
+            instances["roomscrape"].IsLooped = true;
+            instances["roomscrape"].Play();
+            instances["roomscrape"].Pause();
 
             songs = new Dictionary<string, SoundEffectInstance>();
-            //songs.Add("0", content.Load<SoundEffect>("music/1").CreateInstance());
+            songs.Add("0", content.Load<SoundEffect>("audio/music/game").CreateInstance());
             
         }
 
@@ -70,8 +100,8 @@ namespace LD27
         public static void PlayMusic()
         {
             PlayMusic(currentTrack.ToString());
-            currentTrack++;
-            if (currentTrack == 5) currentTrack = 0;
+            //currentTrack++;
+            //if (currentTrack == 5) currentTrack = 0;
         }
 
         public static void PlayMusic(string track)
@@ -110,29 +140,29 @@ namespace LD27
             //if (OptionsMenuScreen.sfx)
                 effects[name].Play(sfxvolume, pitch, 0f);
         }
-        public static void PlaySFX(string name, float volume, float pitch, float pan)
+        //public static void PlaySFX(string name, float volume, float pitch, float pan)
+        //{
+        //   // if (OptionsMenuScreen.sfx)
+        //    if (pan < -1f || pan > 1f) return;
+        //    volume = MathHelper.Clamp(volume, 0f, 1f);
+        //    effects[name].Play(volume * sfxvolume, pitch, pan);
+        //}
+        public static void PlaySFX(string name, float volume, float minpitch, float maxpitch)
         {
            // if (OptionsMenuScreen.sfx)
-            if (pan < -1f || pan > 1f) return;
-            volume = MathHelper.Clamp(volume, 0f, 1f);
-            effects[name].Play(volume * sfxvolume, pitch, pan);
-        }
-        public static void PlaySFX(string name, float minpitch, float maxpitch)
-        {
-           // if (OptionsMenuScreen.sfx)
-                effects[name].Play(sfxvolume, minpitch + ((float)randomNumber.NextDouble() * (maxpitch - minpitch)), 0f);
+                effects[name].Play(sfxvolume * volume, minpitch + ((float)randomNumber.NextDouble() * (maxpitch - minpitch)), 0f);
         }
 
-        internal static void PlaySFX(string name, float volume, float minpitch, float maxpitch, Vector2 Position)
-        {
-            //Vector2 screenPos = Vector2.Transform(Position, Camera.Instance.CameraMatrix);
-            //float dist = (Camera.Instance.Position - Position).Length();
-            //if (dist < 2000f)
-            //{
-            //    float pan = MathHelper.Clamp((screenPos.X - (Camera.Instance.Width / 2)) / (Camera.Instance.Width / 2), -1f, 1f);
-            //    effects[name].Play(((1f/2000f) * (2000f-dist)) * volume * sfxvolume, minpitch + ((float)randomNumber.NextDouble() * (maxpitch - minpitch)), pan);
-            //}
-        }
+        //internal static void PlaySFX(string name, float volume, float minpitch, float maxpitch, Vector2 Position)
+        //{
+        //    //Vector2 screenPos = Vector2.Transform(Position, Camera.Instance.CameraMatrix);
+        //    //float dist = (Camera.Instance.Position - Position).Length();
+        //    //if (dist < 2000f)
+        //    //{
+        //    //    float pan = MathHelper.Clamp((screenPos.X - (Camera.Instance.Width / 2)) / (Camera.Instance.Width / 2), -1f, 1f);
+        //    //    effects[name].Play(((1f/2000f) * (2000f-dist)) * volume * sfxvolume, minpitch + ((float)randomNumber.NextDouble() * (maxpitch - minpitch)), pan);
+        //    //}
+        //}
 
 
         public static void Update(GameTime gameTime)

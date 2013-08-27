@@ -55,7 +55,8 @@ namespace LD27
                         e.DoHit(e.Position, speed * 0.5f, dam); 
                     }
                 }
-
+                gameHero.DoExplosionHit(Position, 10f);
+                AudioController.PlaySFX("explosion1", 1f, -0.1f, 0.1f);
             }
         }
     }

@@ -8,6 +8,7 @@ namespace LD27
 {
     public class Enemy
     {
+        public EnemyType Type;
 
         public Vector3 Position;
         public Vector3 Speed;
@@ -42,6 +43,8 @@ namespace LD27
         public int attackDir=1;
         public int attackFrame = 0;
 
+        public float hitAlpha = 0f;
+
         public Enemy(Vector3 pos, Room room, VoxelSprite sprite)
         {
             Position = pos;
@@ -73,15 +76,30 @@ namespace LD27
                 if (Room.World.GetVoxel(new Vector3(Position.X, Position.Y, z)).Active) { groundHeight = z; break; }
             }
 
-            boundingSphere = new BoundingSphere(Position, 4f);
+            boundingSphere = new BoundingSphere(Position, 3f);
 
             if (knockbackTime > 0) knockbackTime -= gameTime.ElapsedGameTime.TotalMilliseconds;
 
             if (Health <= 0f) Die();
+
+ 
+        }
+
+        internal void DoExplosionHit(Vector3 pos, float r)
+        {
+            if (Vector3.Distance(Position, pos) < r)
+            {
+                float dam = (20f / r) * Vector3.Distance(Position, pos);
+                Vector3 speed = (Position - pos);
+                speed.Normalize();
+                DoHit(Position, speed * 0.5f, dam);
+            }
         }
 
         public virtual void DoHit(Vector3 attackPos, Vector3 speed, float damage)
         {
+            hitAlpha = 1f;
+
             Health -= damage;
         }
 
@@ -102,11 +120,14 @@ namespace LD27
                 for (int y = 0; y < spriteSheet.Y_SIZE; y++)
                     for (int z = 0; z < spriteSheet.Z_SIZE; z++)
                     {
-                        SpriteVoxel v = spriteSheet.AnimChunks[CurrentFrame].Voxels[x, y, z];
-                        if (!v.Active) continue;
-                        Vector3 pos = (- new Vector3(spriteSheet.X_SIZE * Voxel.HALF_SIZE, spriteSheet.Y_SIZE * Voxel.HALF_SIZE, spriteSheet.Z_SIZE * Voxel.HALF_SIZE) * Scale) + (new Vector3(x * Voxel.SIZE, y * Voxel.SIZE, z * Voxel.SIZE) * Scale);
-                        pos = Position + Vector3.Transform(pos, Matrix.CreateRotationX(MathHelper.PiOver2) * Matrix.CreateRotationZ(Rotation));
-                        ParticleController.Instance.Spawn(pos, -(Vector3.One * 0.1f) + (Vector3.One * ((float)Helper.Random.NextDouble()*0.2f)) , 0.3f, v.Color, 3000, true);
+                        if (Helper.Random.Next(5) == 1)
+                        {
+                            SpriteVoxel v = spriteSheet.AnimChunks[CurrentFrame].Voxels[x, y, z];
+                            if (!v.Active) continue;
+                            Vector3 pos = (-new Vector3(spriteSheet.X_SIZE * Voxel.HALF_SIZE, spriteSheet.Y_SIZE * Voxel.HALF_SIZE, spriteSheet.Z_SIZE * Voxel.HALF_SIZE) * Scale) + (new Vector3(x * Voxel.SIZE, y * Voxel.SIZE, z * Voxel.SIZE) * Scale);
+                            pos = Position + Vector3.Transform(pos, Matrix.CreateRotationX(MathHelper.PiOver2) * Matrix.CreateRotationZ(Rotation));
+                            ParticleController.Instance.Spawn(pos, -(Vector3.One * 0.1f) + (Vector3.One * ((float)Helper.Random.NextDouble() * 0.2f)), 0.3f, v.Color, 3000, true);
+                        }
                     }
 
             Active = false;
@@ -122,6 +143,9 @@ namespace LD27
             Voxel checkVoxel;
             Vector3 checkPos;
 
+            Vector3 mapBoundsMin = new Vector3(Chunk.X_SIZE * Voxel.SIZE, Chunk.Y_SIZE * Voxel.SIZE, 0f);
+            Vector3 mapBoundsMax = new Vector3(world.X_SIZE * Voxel.SIZE, world.Y_SIZE * Voxel.SIZE, world.Z_SIZE) - new Vector3(Chunk.X_SIZE * Voxel.SIZE, Chunk.Y_SIZE * Voxel.SIZE, 0f);
+
             if (Speed.Y < 0f)
             {
                 for (float a = -MathHelper.PiOver2 - radiusSweep; a < -MathHelper.PiOver2 + radiusSweep; a += 0.02f)
@@ -135,6 +159,7 @@ namespace LD27
                     foreach (Door d in doors) { if (d.CollisionBox.Contains(checkPos) == ContainmentType.Contains) DoCollide(false, true, false, checkPos, currentRoom, gameHero, false); break; }
                     if (knockbackTime <= 0) foreach (Enemy e in EnemyController.Instance.Enemies.Where(en => en.Room == Room && en!=this)) { if (e.boundingSphere.Contains(checkPos) == ContainmentType.Contains) DoCollide(false, true, false, checkPos, currentRoom, gameHero, false); break; }
                     if (gameHero.boundingSphere.Contains(checkPos) == ContainmentType.Contains) { DoCollide(false, true, false, checkPos, currentRoom, gameHero, true); break; }
+                    if (checkPos.Y < mapBoundsMin.Y || checkPos.Y > mapBoundsMax.Y) { DoCollide(false, true, false, checkPos, currentRoom, gameHero, false); break; }
                 }
             }
             if (Speed.Y > 0f)
@@ -150,6 +175,8 @@ namespace LD27
                     foreach (Door d in doors) { if (d.CollisionBox.Contains(checkPos) == ContainmentType.Contains) DoCollide(false, true, false, checkPos, currentRoom, gameHero, false); break; }
                     if (knockbackTime <= 0) foreach (Enemy e in EnemyController.Instance.Enemies.Where(en => en.Room == Room && en != this)) { if (e.boundingSphere.Contains(checkPos) == ContainmentType.Contains) DoCollide(false, true, false, checkPos, currentRoom, gameHero, false); break; }
                     if (gameHero.boundingSphere.Contains(checkPos) == ContainmentType.Contains) { DoCollide(false, true, false, checkPos, currentRoom, gameHero, true); break; }
+                    if (checkPos.Y < mapBoundsMin.Y || checkPos.Y > mapBoundsMax.Y) { DoCollide(false, true, false, checkPos, currentRoom, gameHero, false); break; }
+
 
                 }
             }
@@ -166,6 +193,7 @@ namespace LD27
                     foreach (Door d in doors) { if (d.CollisionBox.Contains(checkPos) == ContainmentType.Contains) DoCollide(true, false, false, checkPos, currentRoom, gameHero, false); break; }
                     if (knockbackTime <= 0) foreach (Enemy e in EnemyController.Instance.Enemies.Where(en => en.Room == Room && en != this)) { if (e.boundingSphere.Contains(checkPos) == ContainmentType.Contains) DoCollide(true, false, false, checkPos, currentRoom, gameHero, false); break; }
                     if (gameHero.boundingSphere.Contains(checkPos) == ContainmentType.Contains) { DoCollide(true, false, false, checkPos, currentRoom, gameHero, true); break; }
+                    if (checkPos.X < mapBoundsMin.X || checkPos.X > mapBoundsMax.X) { DoCollide(true, false, false, checkPos, currentRoom, gameHero, false); break; }
 
                 }
             }
@@ -182,6 +210,8 @@ namespace LD27
                     foreach (Door d in doors) { if (d.CollisionBox.Contains(checkPos) == ContainmentType.Contains) DoCollide(true, false, false, checkPos, currentRoom, gameHero, false); break; }
                     if (knockbackTime <= 0) foreach (Enemy e in EnemyController.Instance.Enemies.Where(en => en.Room == Room && en != this)) { if (e.boundingSphere.Contains(checkPos) == ContainmentType.Contains) DoCollide(true, false, false, checkPos, currentRoom, gameHero, false); break; }
                     if (gameHero.boundingSphere.Contains(checkPos) == ContainmentType.Contains) { DoCollide(true, false, false, checkPos, currentRoom, gameHero, true); break;}
+                    if (checkPos.X < mapBoundsMin.X || checkPos.X > mapBoundsMax.X) { DoCollide(true, false, false, checkPos, currentRoom, gameHero, false); break; }
+
 
                 }
             }

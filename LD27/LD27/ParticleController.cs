@@ -9,7 +9,7 @@ namespace LD27
 {
     public class ParticleController
     {
-        const int MAX_PARTICLES = 1000;
+        const int MAX_PARTICLES = 500;
 
         public static ParticleController Instance;
 

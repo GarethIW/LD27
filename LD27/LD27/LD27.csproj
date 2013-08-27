@@ -76,6 +76,8 @@
     <Compile Include="Bomb.cs" />
     <Compile Include="BombController.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="Pickup.cs" />
+    <Compile Include="PickupController.cs" />
     <Compile Include="Enemies\Head.cs" />
     <Compile Include="Enemies\Ooze.cs" />
     <Compile Include="Enemies\Sentinel.cs" />

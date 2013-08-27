@@ -61,6 +61,7 @@ namespace LD27
 
         public void Spawn(EnemyType type, Vector3 pos, Room room)
         {
+            //return;
             switch (type)
             {
                 case EnemyType.Manhack:
@@ -78,9 +79,18 @@ namespace LD27
             }
         }
 
+        public void SpawnOoze(Vector3 pos, Room room, int it, float groundHeight)
+        {
+            Ooze no = new Ooze(pos, room, spriteSheets["Ooze"]);
+            no.Iteration = it;
+            no.Health = 50; // 150 - (it * 50);
+            no.groundHeight = groundHeight;
+            Enemies.Add(no);
+        }
+
         public void Update(GameTime gameTime, Camera gameCamera, Room currentRoom, Hero gameHero, List<Door> doors)
         {
-            foreach (Enemy e in Enemies) e.Update(gameTime, currentRoom, gameHero, doors);
+            for(int i=Enemies.Count-1;i>=0;i--) Enemies[i].Update(gameTime, currentRoom, gameHero, doors);
 
             Enemies.RemoveAll(en => !en.Active);
 
@@ -94,6 +104,7 @@ namespace LD27
 
             foreach (Enemy e in Enemies.Where(en=>en.Room==currentRoom))
             {
+                drawEffect.DiffuseColor = new Vector3(1f,1f-e.hitAlpha,1f-e.hitAlpha);
                 drawEffect.Alpha = 1f;
                 drawEffect.World = gameCamera.worldMatrix *
                                        Matrix.CreateRotationX(MathHelper.PiOver2) *
@@ -105,14 +116,43 @@ namespace LD27
                 {
                     pass.Apply();
 
+<<<<<<< HEAD
                     if(!e.attacking)
                         graphicsDevice.DrawUserIndexedPrimitives<VertexPositionNormalColor>(PrimitiveType.TriangleList, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame].VertexArray, 0, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame].VertexArray.Length, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame].IndexArray, 0, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame].VertexArray.Length / 2);
                     else
                          graphicsDevice.DrawUserIndexedPrimitives<VertexPositionNormalColor>(PrimitiveType.TriangleList, e.spriteSheet.AnimChunks[e.numFrames + e.offsetFrame + e.attackFrame].VertexArray, 0, e.spriteSheet.AnimChunks[e.numFrames + e.offsetFrame + e.attackFrame].VertexArray.Length, e.spriteSheet.AnimChunks[e.numFrames + e.offsetFrame + e.attackFrame].IndexArray, 0, e.spriteSheet.AnimChunks[e.numFrames + e.offsetFrame + e.attackFrame].VertexArray.Length / 2);
+=======
+                    if (e.Type != EnemyType.Ooze)
+                    {
+                        if (!e.attacking)
+                            graphicsDevice.DrawUserIndexedPrimitives<VertexPositionNormalColor>(PrimitiveType.TriangleList, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame].VertexArray, 0, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame].VertexArray.Length, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame].IndexArray, 0, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame].VertexArray.Length / 2);
+                        else
+                            graphicsDevice.DrawUserIndexedPrimitives<VertexPositionNormalColor>(PrimitiveType.TriangleList, e.spriteSheet.AnimChunks[e.numFrames + e.offsetFrame + e.attackFrame].VertexArray, 0, e.spriteSheet.AnimChunks[e.numFrames + e.offsetFrame + e.attackFrame].VertexArray.Length, e.spriteSheet.AnimChunks[e.numFrames + e.offsetFrame + e.attackFrame].IndexArray, 0, e.spriteSheet.AnimChunks[e.numFrames + e.offsetFrame + e.attackFrame].VertexArray.Length / 2);
+                    }
+                    
+>>>>>>> 384b3155f24ec7f08c8e85b1df3e61e3ab1ed671
 
 
                 }
 
+                if (e.Type == EnemyType.Ooze)
+                {
+                    foreach (EffectPass pass in drawEffect.CurrentTechnique.Passes)
+                    {
+                        pass.Apply();
+                        graphicsDevice.DrawUserIndexedPrimitives<VertexPositionNormalColor>(PrimitiveType.TriangleList, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame + 3].VertexArray, 0, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame + 3].VertexArray.Length, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame + 3].IndexArray, 0, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame + 3].VertexArray.Length / 2);
+                    }
+                   
+                    drawEffect.Alpha = 0.5f;
+
+                    foreach (EffectPass pass in drawEffect.CurrentTechnique.Passes)
+                    {
+                        pass.Apply();
+                        graphicsDevice.DrawUserIndexedPrimitives<VertexPositionNormalColor>(PrimitiveType.TriangleList, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame].VertexArray, 0, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame].VertexArray.Length, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame].IndexArray, 0, e.spriteSheet.AnimChunks[e.CurrentFrame + e.offsetFrame].VertexArray.Length / 2);
+                    }
+                }
+
+                drawEffect.DiffuseColor = new Vector3(1f, 1f, 1f);
                 drawEffect.Alpha = 0.2f;
                 drawEffect.World = gameCamera.worldMatrix *
                                        Matrix.CreateRotationX(MathHelper.PiOver2) *

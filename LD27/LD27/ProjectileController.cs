@@ -73,25 +73,30 @@ namespace LD27
                 }
                 drawEffect.Alpha = 1f;
             }
-            //foreach (Projectile p in Projectiles.Where(proj => proj.Type == ProjectileType.Grenade))
-            //{
-            //    drawEffect.World = gameCamera.worldMatrix *
-            //                       Matrix.CreateRotationX(MathHelper.PiOver2) *
-            //                       Matrix.CreateRotationZ(-MathHelper.PiOver2) *
-            //                       p.Rotation *
-            //                       Matrix.CreateScale(0.5f) *
-            //                       Matrix.CreateTranslation(p.Position);
-            //    foreach (EffectPass pass in drawEffect.CurrentTechnique.Passes)
-            //    {
-            //        pass.Apply();
+            foreach (Projectile p in Projectiles.Where(proj => proj.Type == ProjectileType.Rocket && proj.Room == currentRoom))
+            {
+                
+                drawEffect.World = gameCamera.worldMatrix *
+                                   Matrix.CreateRotationX(MathHelper.PiOver2) *
+                                   Matrix.CreateRotationZ(-MathHelper.PiOver2) *
+                                   p.Rotation *
+                                   Matrix.CreateScale(0.5f) *
+                                   Matrix.CreateTranslation(p.Position);
+                foreach (EffectPass pass in drawEffect.CurrentTechnique.Passes)
+                {
+                    pass.Apply();
 
-            //        graphicsDevice.DrawUserIndexedPrimitives<VertexPositionNormalColor>(PrimitiveType.TriangleList, projectileStrip.AnimChunks[1].VertexArray, 0, projectileStrip.AnimChunks[1].VertexArray.Length, projectileStrip.AnimChunks[1].IndexArray, 0, projectileStrip.AnimChunks[1].VertexArray.Length / 2);
+                    graphicsDevice.DrawUserIndexedPrimitives<VertexPositionNormalColor>(PrimitiveType.TriangleList, projectileStrip.AnimChunks[0].VertexArray, 0, projectileStrip.AnimChunks[0].VertexArray.Length, projectileStrip.AnimChunks[0].IndexArray, 0, projectileStrip.AnimChunks[0].VertexArray.Length / 2);
 
-            //    }
-            //}
+                }
+
+            }
         }
 
-        
+        public void Reset()
+        {
+            Projectiles.Clear();
+        }
 
         public void Spawn(ProjectileType type, Room room, Vector3 pos, Matrix rot, Vector3 speed, double life, bool gravity)
         {
@@ -102,6 +107,48 @@ namespace LD27
                     p = new Projectile()
                     {
                         Type = ProjectileType.Laserbolt,
+                        Room = room,
+                        Active = true,
+                        Position = pos,
+                        Speed = speed,
+                        Rotation = rot,
+                        affectedByGravity = gravity,
+                        Life = life,
+                        Time = 0
+                    };
+                    break;
+                case ProjectileType.Acid:
+                    p = new Projectile()
+                    {
+                        Type = ProjectileType.Acid,
+                        Room = room,
+                        Active = true,
+                        Position = pos,
+                        Speed = speed,
+                        Rotation = rot,
+                        affectedByGravity = gravity,
+                        Life = life,
+                        Time = 0
+                    };
+                    break;
+                case ProjectileType.Rocket:
+                    p = new Projectile()
+                    {
+                        Type = ProjectileType.Rocket,
+                        Room = room,
+                        Active = true,
+                        Position = pos,
+                        Speed = speed,
+                        Rotation = rot,
+                        affectedByGravity = gravity,
+                        Life = life,
+                        Time = 0
+                    };
+                    break;
+                case ProjectileType.Gatling:
+                    p = new Projectile()
+                    {
+                        Type = ProjectileType.Gatling,
                         Room = room,
                         Active = true,
                         Position = pos,
