@@ -31,7 +31,7 @@ namespace LD27.Mono.Mac
 		public override void FinishedLaunching (MonoMac.Foundation.NSObject notification)
 		{
 			game = new LD27Game ();
-			game.Window.Title = "10 Seconds";
+			game.Window.Title = "Spatium Secondorum Decum";
 			game.Run ();
 		}
 
