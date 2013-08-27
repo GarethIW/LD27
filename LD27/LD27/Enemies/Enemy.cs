@@ -159,7 +159,7 @@ namespace LD27
                     foreach (Door d in doors) { if (d.CollisionBox.Contains(checkPos) == ContainmentType.Contains) DoCollide(false, true, false, checkPos, currentRoom, gameHero, false); break; }
                     if (knockbackTime <= 0) foreach (Enemy e in EnemyController.Instance.Enemies.Where(en => en.Room == Room && en!=this)) { if (e.boundingSphere.Contains(checkPos) == ContainmentType.Contains) DoCollide(false, true, false, checkPos, currentRoom, gameHero, false); break; }
                     if (gameHero.boundingSphere.Contains(checkPos) == ContainmentType.Contains) { DoCollide(false, true, false, checkPos, currentRoom, gameHero, true); break; }
-                    if (checkPos.Y < mapBoundsMin.Y || checkPos.Y > mapBoundsMax.Y) { DoCollide(false, true, false, checkPos, currentRoom, gameHero, true); break; }
+                    if (checkPos.Y < mapBoundsMin.Y || checkPos.Y > mapBoundsMax.Y) { DoCollide(false, true, false, checkPos, currentRoom, gameHero, false); break; }
                 }
             }
             if (Speed.Y > 0f)
@@ -175,7 +175,7 @@ namespace LD27
                     foreach (Door d in doors) { if (d.CollisionBox.Contains(checkPos) == ContainmentType.Contains) DoCollide(false, true, false, checkPos, currentRoom, gameHero, false); break; }
                     if (knockbackTime <= 0) foreach (Enemy e in EnemyController.Instance.Enemies.Where(en => en.Room == Room && en != this)) { if (e.boundingSphere.Contains(checkPos) == ContainmentType.Contains) DoCollide(false, true, false, checkPos, currentRoom, gameHero, false); break; }
                     if (gameHero.boundingSphere.Contains(checkPos) == ContainmentType.Contains) { DoCollide(false, true, false, checkPos, currentRoom, gameHero, true); break; }
-                    if (checkPos.Y < mapBoundsMin.Y || checkPos.Y > mapBoundsMax.Y) { DoCollide(false, true, false, checkPos, currentRoom, gameHero, true); break; }
+                    if (checkPos.Y < mapBoundsMin.Y || checkPos.Y > mapBoundsMax.Y) { DoCollide(false, true, false, checkPos, currentRoom, gameHero, false); break; }
 
 
                 }
@@ -193,7 +193,7 @@ namespace LD27
                     foreach (Door d in doors) { if (d.CollisionBox.Contains(checkPos) == ContainmentType.Contains) DoCollide(true, false, false, checkPos, currentRoom, gameHero, false); break; }
                     if (knockbackTime <= 0) foreach (Enemy e in EnemyController.Instance.Enemies.Where(en => en.Room == Room && en != this)) { if (e.boundingSphere.Contains(checkPos) == ContainmentType.Contains) DoCollide(true, false, false, checkPos, currentRoom, gameHero, false); break; }
                     if (gameHero.boundingSphere.Contains(checkPos) == ContainmentType.Contains) { DoCollide(true, false, false, checkPos, currentRoom, gameHero, true); break; }
-                    if (checkPos.X < mapBoundsMin.X || checkPos.X > mapBoundsMax.X) { DoCollide(true, false, false, checkPos, currentRoom, gameHero, true); break; }
+                    if (checkPos.X < mapBoundsMin.X || checkPos.X > mapBoundsMax.X) { DoCollide(true, false, false, checkPos, currentRoom, gameHero, false); break; }
 
                 }
             }
@@ -210,7 +210,7 @@ namespace LD27
                     foreach (Door d in doors) { if (d.CollisionBox.Contains(checkPos) == ContainmentType.Contains) DoCollide(true, false, false, checkPos, currentRoom, gameHero, false); break; }
                     if (knockbackTime <= 0) foreach (Enemy e in EnemyController.Instance.Enemies.Where(en => en.Room == Room && en != this)) { if (e.boundingSphere.Contains(checkPos) == ContainmentType.Contains) DoCollide(true, false, false, checkPos, currentRoom, gameHero, false); break; }
                     if (gameHero.boundingSphere.Contains(checkPos) == ContainmentType.Contains) { DoCollide(true, false, false, checkPos, currentRoom, gameHero, true); break;}
-                    if (checkPos.X < mapBoundsMin.X || checkPos.X > mapBoundsMax.X) { DoCollide(true, false, false, checkPos, currentRoom, gameHero, true); break; }
+                    if (checkPos.X < mapBoundsMin.X || checkPos.X > mapBoundsMax.X) { DoCollide(true, false, false, checkPos, currentRoom, gameHero, false); break; }
 
 
                 }

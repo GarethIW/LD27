@@ -9,7 +9,7 @@ namespace LD27
 {
     public class RoomShift
     {
-        static SoundEffectInstance scrapeSound = AudioController.effects["roomscrape"].CreateInstance();
+        //public static SoundEffectInstance scrapeSound = AudioController.effects["roomscrape"].CreateInstance();
 
         public int RoomX;
         public int RoomY;
@@ -30,10 +30,10 @@ namespace LD27
             RoomTargetY = targy;
 
             //scrapeSound = AudioController.effects["roomscrape"].CreateInstance();
-            if(!scrapeSound.IsLooped)
-                scrapeSound.IsLooped = true;
-            scrapeSound.Volume = 0f;
-            scrapeSound.Play();
+            //if(!scrapeSound.IsLooped)
+            //    scrapeSound.IsLooped = true;
+            AudioController.instances["roomscrape"].Volume = 0f;
+            AudioController.instances["roomscrape"].Resume();
 
         }
 
@@ -43,13 +43,13 @@ namespace LD27
             dist = MathHelper.Clamp(dist, 0f, 3f);
             Vector3 dir = new Vector3(RoomX, RoomY, 0f) - new Vector3(gameHero.RoomX, gameHero.RoomY, 0f);
 
-            scrapeSound.Pan = (1f / 3f) * dir.X;
-            scrapeSound.Volume = (1f / 3f) * dist;
+            AudioController.instances["roomscrape"].Pan = (1f / 3f) * dir.X;
+            AudioController.instances["roomscrape"].Volume = (1f / 3f) * dist;
 
             shiftTime += gameTime.ElapsedGameTime.TotalMilliseconds;
             if (shiftTime >= targetShiftTime)
             {
-                scrapeSound.Pause();
+                AudioController.instances["roomscrape"].Pause();
                 AudioController.PlaySFX("roomclunk", (1f / 3f) * dist, 0f, (1f / 3f) * dir.X);
                 Complete = true;
                 Room tempRoom = Rooms[RoomX, RoomY];

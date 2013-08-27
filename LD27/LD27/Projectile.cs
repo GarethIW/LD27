@@ -120,9 +120,9 @@ namespace LD27
                             }
                             Active = false;
                         }
-                        if (gameHero.boundingSphere.Contains(Position + (d * ((Position + Speed) - Position))) == ContainmentType.Contains)
+                        if (!gameHero.Dead && gameHero.boundingSphere.Contains(Position + (d * ((Position + Speed) - Position))) == ContainmentType.Contains)
                         {
-                            if (!gameHero.DoHit(Position + (d * ((Position + Speed) - Position)), Speed, 5f))
+                            if (!gameHero.DoHit(Position + (d * ((Position + Speed) - Position)), Speed, 2f))
                             {
                                 Speed = -Speed;
                                 float rot = Helper.V2ToAngle(new Vector2(Speed.X,Speed.Y));
@@ -130,6 +130,7 @@ namespace LD27
                                 Speed = new Vector3(Helper.AngleToVector(rot, 1f),0f);
                                 Deflected = true;
                                 Rotation = Matrix.CreateRotationZ(rot);
+                                AudioController.PlaySFX(Type== ProjectileType.Laserbolt?"deflect":"gatling_deflect", Type== ProjectileType.Laserbolt?0.5f:1f, -0.1f, 0.1f);
                             }
                             else Active = false;
                         }
@@ -160,14 +161,18 @@ namespace LD27
                             }
                            
                             Active = false;
+                            AudioController.PlaySFX("explosion2",1f, -0.1f, 0.1f);
+
                         }
-                        if (gameHero.boundingSphere.Contains(Position + (d * ((Position + Speed) - Position))) == ContainmentType.Contains)
+                        if (!gameHero.Dead && gameHero.boundingSphere.Contains(Position + (d * ((Position + Speed) - Position))) == ContainmentType.Contains)
                         {
                             if (!gameHero.DoHit(Position + (d * ((Position + Speed) - Position)), Speed, 0f))
                             {
                                 Speed = -Speed;
                                 Deflected = true;
                                 Rotation = Matrix.CreateRotationZ(Helper.V2ToAngle(new Vector2(Speed.X, Speed.Y)));
+                                AudioController.PlaySFX("deflect", 0.5f, -0.1f, 0.1f);
+
                             }
                             else
                             {
@@ -175,6 +180,8 @@ namespace LD27
                                 Room.World.Explode(Position + (d * ((Position + Speed) - Position)), 5f, Room == currentRoom);
                                 if (Room == currentRoom) ParticleController.Instance.SpawnExplosion(Position);
                                 Active = false;
+                                AudioController.PlaySFX("explosion2", 1f, -0.1f, 0.1f);
+
                             }
                         }
                         if (Deflected) 
@@ -185,7 +192,9 @@ namespace LD27
                                     e.DoExplosionHit(Position + (d * ((Position + Speed) - Position)), 5f);
                                     Room.World.Explode(Position + (d * ((Position + Speed) - Position)), 5f, Room == currentRoom);
                                     if (Room == currentRoom) ParticleController.Instance.SpawnExplosion(Position);
-                                    Active = false; 
+                                    Active = false;
+                                    AudioController.PlaySFX("explosion2", 1f, -0.1f, 0.1f);
+
                                 } 
                             }
 
@@ -206,8 +215,10 @@ namespace LD27
                             }
                            
                             Active = false;
+                            AudioController.PlaySFX("acid_hit", 1f, -0.1f, 0.1f);
+
                         }
-                        if (gameHero.boundingSphere.Contains(Position + (d * ((Position + Speed) - Position))) == ContainmentType.Contains)
+                        if (!gameHero.Dead && gameHero.boundingSphere.Contains(Position + (d * ((Position + Speed) - Position))) == ContainmentType.Contains)
                         {
                             if (!gameHero.DoHit(Position + (d * ((Position + Speed) - Position)), Speed, 5f))
                             {
@@ -221,15 +232,17 @@ namespace LD27
                             else
                             {
                                 Active = false;
+                                AudioController.PlaySFX("acid_hit", 1f, -0.1f, 0.1f);
+
                                 for (int i = 0; i < 4; i++)
                                 {
                                     ParticleController.Instance.Spawn(Position, new Vector3(-0.05f + ((float)Helper.Random.NextDouble() * 0.1f), -0.05f + ((float)Helper.Random.NextDouble() * 0.1f), -((float)Helper.Random.NextDouble() * 0.5f)), 0.5f, new Color(0f, 0.5f + ((float)Helper.Random.NextDouble() * 0.5f), 0f), 1000, true);
                                 }
                             }
                         }
-                        if (Deflected) 
-                            foreach (Enemy e in EnemyController.Instance.Enemies.Where(en => en.Room == Room)) 
-                            { if (e.boundingSphere.Contains(Position + (d * ((Position + Speed) - Position))) == ContainmentType.Contains) { e.DoHit(Position + (d * ((Position + Speed) - Position)), Speed, 5f); Active = false; } }
+                        //if (Deflected) 
+                        //    foreach (Enemy e in EnemyController.Instance.Enemies.Where(en => en.Room == Room)) 
+                        //    { if (e.boundingSphere.Contains(Position + (d * ((Position + Speed) - Position))) == ContainmentType.Contains) { e.DoHit(Position + (d * ((Position + Speed) - Position)), Speed, 5f); Active = false; } }
 
                     }
                     break;

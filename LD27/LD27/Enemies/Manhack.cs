@@ -87,7 +87,7 @@ namespace LD27
         {
             if (withPlayer)
             {
-                if (!gameHero.DoHit(checkPosition, Speed, 1))
+                if (!gameHero.DoHit(checkPosition, Speed, 1f))
                 {
                     if (x) Speed.X = (Speed.X * -0.9f);
                     if (y) Speed.Y = (Speed.Y * -0.9f);

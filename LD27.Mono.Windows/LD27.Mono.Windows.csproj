@@ -9,11 +9,11 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LD27</RootNamespace>
-    <AssemblyName>LD27</AssemblyName>
+    <AssemblyName>SpatiumSecondorumDecem</AssemblyName>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -32,7 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\LD27\LD27\AudioController.cs">
@@ -86,6 +87,12 @@
     <Compile Include="..\LD27\LD27\ParticleCube.cs">
       <Link>ParticleCube.cs</Link>
     </Compile>
+    <Compile Include="..\LD27\LD27\Pickup.cs">
+      <Link>Pickup.cs</Link>
+    </Compile>
+    <Compile Include="..\LD27\LD27\PickupController.cs">
+      <Link>PickupController.cs</Link>
+    </Compile>
     <Compile Include="..\LD27\LD27\Projectile.cs">
       <Link>Projectile.cs</Link>
     </Compile>
@@ -124,26 +131,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Lidgren.Network, Version=2011.3.12.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\WindowsGL\Debug\Lidgren.Network.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoGame.Framework, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\WindowsGL\Debug\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\WindowsGL\Debug\OpenTK.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.XML" />
-    <Reference Include="Tao.Sdl, Version=1.2.13.0, Culture=neutral, PublicKeyToken=9c7a200e36c0094e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\WindowsGL\Debug\Tao.Sdl.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
@@ -205,6 +192,148 @@
     </Content>
     <Content Include="..\LD27\LD27Content\enemies\ooze.vxs">
       <Link>Content\enemies\ooze.vxs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\acid_hit.xnb">
+      <Link>Content\audio\sfx\acid_hit.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\door.xnb">
+      <Link>Content\audio\sfx\door.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\explosion1.xnb">
+      <Link>Content\audio\sfx\explosion1.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\explosion2.xnb">
+      <Link>Content\audio\sfx\explosion2.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\face_die.xnb">
+      <Link>Content\audio\sfx\face_die.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\face_gun.xnb">
+      <Link>Content\audio\sfx\face_gun.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\face_missile.xnb">
+      <Link>Content\audio\sfx\face_missile.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\face_open.xnb">
+      <Link>Content\audio\sfx\face_open.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\flesh_hit.xnb">
+      <Link>Content\audio\sfx\flesh_hit.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\metal_hit.xnb">
+      <Link>Content\audio\sfx\metal_hit.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\ooze_die.xnb">
+      <Link>Content\audio\sfx\ooze_die.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\ooze_spit.xnb">
+      <Link>Content\audio\sfx\ooze_spit.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\sword.xnb">
+      <Link>Content\audio\sfx\sword.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\music\game.xnb">
+      <Link>Content\audio\music\game.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\hud.xnb">
+      <Link>Content\hud.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\stingers.xnb">
+      <Link>Content\stingers.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\timerfont-large.xnb">
+      <Link>Content\timerfont-large.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\timerfont-small.xnb">
+      <Link>Content\timerfont-small.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\title-bg.xnb">
+      <Link>Content\title-bg.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\titlesheet.xnb">
+      <Link>Content\titlesheet.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\ooze_split.xnb">
+      <Link>Content\audio\sfx\ooze_split.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\sentinel_shoot.xnb">
+      <Link>Content\audio\sfx\sentinel_shoot.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Lidgren.Network, Version=2011.3.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\WindowsGL\Debug\Lidgren.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\WindowsGL\Debug\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\WindowsGL\Debug\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="Tao.Sdl, Version=1.2.13.0, Culture=neutral, PublicKeyToken=9c7a200e36c0094e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\MonoGame\MonoGame.Framework\bin\WindowsGL\Debug\Tao.Sdl.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\bomb_place.xnb">
+      <Link>Content\audio\sfx\bomb_place.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\collect_health.xnb">
+      <Link>Content\audio\sfx\collect_health.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\defend.xnb">
+      <Link>Content\audio\sfx\defend.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\deflect.xnb">
+      <Link>Content\audio\sfx\deflect.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\gatling_deflect.xnb">
+      <Link>Content\audio\sfx\gatling_deflect.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\player_hit.xnb">
+      <Link>Content\audio\sfx\player_hit.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

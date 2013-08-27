@@ -19,6 +19,8 @@ namespace LD27
         int missilesLaunched = 0;
         double missileDelay = 0;
 
+        bool gunSoundPlayed = false;
+
         public Head(Vector3 pos, Room room, VoxelSprite sprite)
             : base(pos, room, sprite)
         {
@@ -60,6 +62,7 @@ namespace LD27
                 attacking = true;
                 attackDir = 1;
                 attackMode = Helper.Random.Next(2);
+                AudioController.PlaySFX("face_open", 1f, 0f, 0f);
             }
 
             if (attacking)
@@ -75,6 +78,7 @@ namespace LD27
                 }
                 if (attackFrame == numAttackFrames-1 && attackDir == 1)
                 {
+                    
                     switch (attackMode)
                     {
                         case 0:
@@ -86,10 +90,13 @@ namespace LD27
                                 float rot = (Rotation - 0.5f) + ((float)Helper.Random.NextDouble() * 1f);
                                 ProjectileController.Instance.Spawn(ProjectileType.Rocket, Room, Position + new Vector3(0f,0f,-2f), Matrix.CreateRotationZ(rot), new Vector3(Helper.AngleToVector(rot, 0.5f), 0.2f), 7000, false);
                                 missilesLaunched++;
+                                AudioController.PlaySFX("face_missile", 1f, 0f, 0f);
                             }
                             if (missilesLaunched == 3) { attackDir = -1; missilesLaunched = 0; }
                             break;
                         case 1:
+                            if (!gunSoundPlayed) { AudioController.PlaySFX("face_gun", 1f, 0f, 0f); gunSoundPlayed = true; }
+                           
                             missileDelay += gameTime.ElapsedGameTime.TotalMilliseconds;
                             if (missileDelay >= 50)
                             {
@@ -103,7 +110,7 @@ namespace LD27
                     }
                 }
 
-                if (attackFrame == -1) { attackFrame = 0; attacking = false; offsetFrame = 0; attackDir = 1; }
+                if (attackFrame == -1) { attackFrame = 0; attacking = false; offsetFrame = 0; attackDir = 1; gunSoundPlayed = false; }
 
             }
 
@@ -129,6 +136,12 @@ namespace LD27
             Health -= damage;
 
 
+        }
+
+        public override void Die()
+        {
+            AudioController.PlaySFX("face_die", 1f, 0f, 0f);
+            base.Die();
         }
     }
 }

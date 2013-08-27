@@ -93,7 +93,10 @@ namespace LD27
             }
         }
 
-        
+        public void Reset()
+        {
+            Projectiles.Clear();
+        }
 
         public void Spawn(ProjectileType type, Room room, Vector3 pos, Matrix rot, Vector3 speed, double life, bool gravity)
         {

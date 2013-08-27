@@ -44,6 +44,8 @@ namespace LD27
                     if (attackFrame == numAttackFrames-1 && attackDir == 1)
                     {
                         ProjectileController.Instance.Spawn(ProjectileType.Laserbolt, Room, Position, Matrix.CreateRotationZ(Rotation), new Vector3(Helper.AngleToVector(Rotation, 0.5f),0f), 5000, false);
+                        AudioController.PlaySFX("sentinel_shoot", 1f, 0f, 0f);
+
                     }
 
                     if (attackFrame == numAttackFrames-1) { attackDir = -1; attackFrame = numAttackFrames-2; }

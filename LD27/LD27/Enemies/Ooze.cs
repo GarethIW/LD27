@@ -22,7 +22,7 @@ namespace LD27
             numFrames = 3;
             offsetFrame = 1;
             Target = Position;
-            Health = 150;
+            Health = 50;
             Rotation = (float)(Helper.Random.NextDouble() * MathHelper.TwoPi);
         }
 
@@ -47,6 +47,8 @@ namespace LD27
                 dir.Normalize();
 
                 ProjectileController.Instance.Spawn(ProjectileType.Acid, Room, Position, Matrix.Identity, new Vector3(dir.X * 0.3f, dir.Y * 0.3f, -(float)Helper.Random.NextDouble()), 5000, true);
+                AudioController.PlaySFX("ooze_spit", 1f, 0f, 0f);
+
             }
 
             Scale = 1f - (0.2f * (float)Iteration);
@@ -89,12 +91,16 @@ namespace LD27
         {
             if (Iteration < 2)
             {
+                AudioController.PlaySFX("ooze_split", 1f, 0f, 0f);
+
                 for (int i = 0; i <3; i++)
                 {
                     float height = spriteSheet.Z_SIZE * Voxel.HALF_SIZE;
-                    EnemyController.Instance.SpawnOoze(Position + new Vector3(0f,0f, height*(0.2f * (Iteration+1))), Room, Iteration + 1);
+                    EnemyController.Instance.SpawnOoze(Position + new Vector3(0f,0f, height*(0.2f * (Iteration+1))), Room, Iteration + 1, groundHeight);
                 }
             }
+            else  AudioController.PlaySFX("ooze_die", 1f, 0f, 0f);
+            
             base.Die();
         }
     }

@@ -61,6 +61,7 @@ namespace LD27
 
         public void Spawn(EnemyType type, Vector3 pos, Room room)
         {
+            //return;
             switch (type)
             {
                 case EnemyType.Manhack:
@@ -78,11 +79,12 @@ namespace LD27
             }
         }
 
-        public void SpawnOoze(Vector3 pos, Room room, int it)
+        public void SpawnOoze(Vector3 pos, Room room, int it, float groundHeight)
         {
             Ooze no = new Ooze(pos, room, spriteSheets["Ooze"]);
             no.Iteration = it;
-            no.Health = 150 - (it * 50);
+            no.Health = 50; // 150 - (it * 50);
+            no.groundHeight = groundHeight;
             Enemies.Add(no);
         }
 

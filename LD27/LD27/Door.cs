@@ -12,6 +12,9 @@ namespace LD27
         public Vector3 Position;
         public BoundingBox CollisionBox;
 
+        public Vector3 ParticlePosition;
+        public Vector3 ParticleDir;
+
         public bool IsOpen = false;
         public bool IsBlocked = true;
         public int Dir = 0;
@@ -34,6 +37,26 @@ namespace LD27
                 CollisionBox = new BoundingBox(pos - new Vector3(4f, 1f, 4f), pos + new Vector3(4f, 1f, 4f));
             else
                 CollisionBox = new BoundingBox(pos - new Vector3(1f, 4f, 4f), pos + new Vector3(1f, 4f, 4f));
+
+            switch (Dir)
+            {
+                case 0:
+                    ParticlePosition = Position + new Vector3(0f, -15f, 0f);
+                    ParticleDir = new Vector3(0f, 1f, 0f);
+                    break;
+                case 1:
+                    ParticlePosition = Position + new Vector3(15f, 0f, 0f);
+                    ParticleDir = new Vector3(-1f, 0f, 0f);
+                    break;
+                case 2:
+                    ParticlePosition = Position + new Vector3(0f, 15f, 0f);
+                    ParticleDir = new Vector3(0f, -1f, 0f);
+                    break;
+                case 3:
+                    ParticlePosition = Position + new Vector3(-15f, 0f, 0f);
+                    ParticleDir = new Vector3(1f, 0f, 0f);
+                    break;
+            }
 
             spriteSheet = sheet;
         }
@@ -90,8 +113,14 @@ namespace LD27
         {
             if (IsOpen)
             {
+
                 if (immediate) { IsOpen = false; currentFrame = 0; opening = false; closing = false; }
-                else closing = true;
+                else
+                {
+                    if(!closing) AudioController.PlaySFX("door", 0.3f, 0f, 0f);
+
+                    closing = true;
+                }
             }
         }
 
@@ -99,8 +128,14 @@ namespace LD27
         {
             if (!IsOpen)
             {
+
                 if (immediate) { IsOpen = true; currentFrame = spriteSheet.AnimChunks.Count - 1; closing = false; opening = false; }
-                else opening = true;
+                else
+                {
+                    if(!opening) AudioController.PlaySFX("door", 0.3f, 0f, 0f);
+                 
+                    opening = true;
+                }
             }
         }
 
