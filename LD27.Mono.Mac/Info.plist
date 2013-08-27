@@ -5,7 +5,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.team-mango.10.seconds</string>
 	<key>CFBundleName</key>
-	<string>10 Seconds</string>
+	<string>Spatium Secondorum Decum</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>LSMinimumSystemVersion</key>
@@ -17,6 +17,6 @@
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.games</string>
 	<key>CFBundleDisplayName</key>
-	<string>10 Seconds</string>
+	<string>Spatium Secondorum Decum</string>
 </dict>
 </plist>
