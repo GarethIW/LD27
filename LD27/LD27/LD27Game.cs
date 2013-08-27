@@ -126,7 +126,7 @@ namespace LD27
                 objectSheet = new VoxelSprite(16, 16, 16);
                 LoadVoxels.LoadSprite(Path.Combine(Content.RootDirectory, "dynamic.vxs"), ref objectSheet);
             }
-            
+            else if (AudioController.instances["roomscrape"].State == SoundState.Playing) AudioController.instances["roomscrape"].Pause();
 
             gameCamera = new Camera(GraphicsDevice, GraphicsDevice.Viewport);
             particleController = new ParticleController(GraphicsDevice);
@@ -660,7 +660,7 @@ namespace LD27
 
             OpenDoors();
 
-            AudioController.PlayMusic("0");
+            //AudioController.PlayMusic("0");
         }
 #endregion
     }

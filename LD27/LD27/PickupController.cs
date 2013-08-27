@@ -44,7 +44,7 @@ namespace LD27
             foreach (Pickup p in Pickups.Where(proj => proj.Active))
             {
                 p.Update(gameTime, currentRoom, gameHero);
-                if (gameHero.boundingSphere.Intersects(p.boundingSphere)) p.Collect(gameHero);
+                if (gameHero.boundingSphere.Intersects(p.boundingSphere) && p.Room==currentRoom) p.Collect(gameHero);
             }
 
             Pickups.RemoveAll(proj => !proj.Active);

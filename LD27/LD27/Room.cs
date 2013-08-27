@@ -109,10 +109,10 @@ namespace LD27
                 World.CopySprite(rx * Chunk.X_SIZE, (8 - ry) * Chunk.X_SIZE, 14, tileSheet.AnimChunks[t], 0, 1);
                 World.CopySprite((14 - rx) * Chunk.X_SIZE, (8 - ry) * Chunk.X_SIZE, 14, tileSheet.AnimChunks[t], 0, 1);
 
-                if(Helper.Random.Next(7)==1) PickupController.Instance.Spawn(PickupType.Health, this, VoxelWorld.ToScreenSpace((rx * Chunk.X_SIZE) + (Chunk.X_SIZE / 2), (ry * Chunk.Y_SIZE) + (Chunk.Y_SIZE / 2), 21));
-                if (Helper.Random.Next(7) == 1) PickupController.Instance.Spawn(PickupType.Health, this, VoxelWorld.ToScreenSpace(((14 - rx) * Chunk.X_SIZE) + (Chunk.X_SIZE / 2), (ry * Chunk.Y_SIZE) + (Chunk.Y_SIZE / 2), 21));
-                if (Helper.Random.Next(7) == 1) PickupController.Instance.Spawn(PickupType.Health, this, VoxelWorld.ToScreenSpace((rx * Chunk.X_SIZE) + (Chunk.X_SIZE / 2), ((8 - ry) * Chunk.Y_SIZE) + (Chunk.Y_SIZE / 2), 21));
-                if (Helper.Random.Next(7) == 1) PickupController.Instance.Spawn(PickupType.Health, this, VoxelWorld.ToScreenSpace(((14 - rx) * Chunk.X_SIZE) + (Chunk.X_SIZE / 2), ((8 - ry) * Chunk.Y_SIZE) + (Chunk.Y_SIZE / 2), 21));
+                if(Helper.Random.Next(5)==1) PickupController.Instance.Spawn(PickupType.Health, this, VoxelWorld.ToScreenSpace((rx * Chunk.X_SIZE) + (Chunk.X_SIZE / 2), (ry * Chunk.Y_SIZE) + (Chunk.Y_SIZE / 2), 21));
+                if (Helper.Random.Next(5) == 1) PickupController.Instance.Spawn(PickupType.Health, this, VoxelWorld.ToScreenSpace(((14 - rx) * Chunk.X_SIZE) + (Chunk.X_SIZE / 2), (ry * Chunk.Y_SIZE) + (Chunk.Y_SIZE / 2), 21));
+                if (Helper.Random.Next(5) == 1) PickupController.Instance.Spawn(PickupType.Health, this, VoxelWorld.ToScreenSpace((rx * Chunk.X_SIZE) + (Chunk.X_SIZE / 2), ((8 - ry) * Chunk.Y_SIZE) + (Chunk.Y_SIZE / 2), 21));
+                if (Helper.Random.Next(5) == 1) PickupController.Instance.Spawn(PickupType.Health, this, VoxelWorld.ToScreenSpace(((14 - rx) * Chunk.X_SIZE) + (Chunk.X_SIZE / 2), ((8 - ry) * Chunk.Y_SIZE) + (Chunk.Y_SIZE / 2), 21));
             }
 
             for (int i = 0; i < 1; i++)
