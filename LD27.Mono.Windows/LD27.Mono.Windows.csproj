@@ -9,13 +9,11 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LD27</RootNamespace>
-<<<<<<< .merge_file_xS5ipj
     <AssemblyName>LD27</AssemblyName>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
-=======
     <AssemblyName>SpatiumSecondorumDecem</AssemblyName>
     <AssemblyName>SpatiumSecondorumDecum</AssemblyName>
     <AssemblyName>SpatiumSecondorumDecem</AssemblyName>
@@ -25,7 +23,6 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
->>>>>>> .merge_file_GZ7AyB
     <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -45,12 +42,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-<<<<<<< .merge_file_xS5ipj
     <ApplicationIcon>Icon.ico</ApplicationIcon>
-=======
     <ApplicationIcon>
     </ApplicationIcon>
->>>>>>> .merge_file_GZ7AyB
     <ApplicationIcon>SSD.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
