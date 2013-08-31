@@ -41,10 +41,12 @@ namespace LD27
 
         bool attacking = false;
         double attackTime = 0;
-        double attackTargetTime = 500;
+        double attackRecoveryTime = 0;
+        double attackTargetTime = 200;
         float attackRotation = 0f;
         int attackDir;
         int attackFrame = 0;
+
 
 
         bool defending = false;
@@ -109,10 +111,10 @@ namespace LD27
 
             if (RoomX == exitRoomX && RoomY == exitRoomY && introTargetReached)
             {
-                if (Position.X < doors[3].Position.X - 5f && doors[3] == exitDoor) { exitReached = true; }
-                if (Position.X > doors[1].Position.X + 5f && doors[1] == exitDoor) { exitReached = true; }
-                if (Position.Y < doors[0].Position.Y - 5f && doors[0] == exitDoor) { exitReached = true; }
-                if (Position.Y > doors[2].Position.Y + 5f && doors[2] == exitDoor) { exitReached = true; }
+                if (Position.X < doors[3].Position.X - 5f && doors[3] == exitDoor && !exitReached) { AudioController.PlaySFX("complete", 1f, 0f, 0f); exitReached = true; }
+                if (Position.X > doors[1].Position.X + 5f && doors[1] == exitDoor && !exitReached) { AudioController.PlaySFX("complete", 1f, 0f, 0f); exitReached = true; }
+                if (Position.Y < doors[0].Position.Y - 5f && doors[0] == exitDoor && !exitReached) { AudioController.PlaySFX("complete", 1f, 0f, 0f); exitReached = true; }
+                if (Position.Y > doors[2].Position.Y + 5f && doors[2] == exitDoor && !exitReached) { AudioController.PlaySFX("complete", 1f, 0f, 0f); exitReached = true; }
             }
 
             if (introTargetReached)
@@ -121,11 +123,7 @@ namespace LD27
                 if (Position.X > doors[1].Position.X && !(doors[1] == exitDoor && RoomX == exitRoomX && RoomY == exitRoomY)) { RoomX++; Position = doors[3].Position + new Vector3(0f, 0f, 4f); ResetDoors(doors, ref rooms, allRoomsComplete, exitRoomX, exitRoomY, exitDoor); }
                 if (Position.Y < doors[0].Position.Y && !(doors[0] == exitDoor && RoomX == exitRoomX && RoomY == exitRoomY)) { RoomY--; Position = doors[2].Position + new Vector3(0f, 0f, 4f); ResetDoors(doors, ref rooms, allRoomsComplete, exitRoomX, exitRoomY, exitDoor); }
                 if (Position.Y > doors[2].Position.Y && !(doors[2] == exitDoor && RoomX == exitRoomX && RoomY == exitRoomY)) { RoomY++; Position = doors[0].Position + new Vector3(0f, 0f, 4f); ResetDoors(doors, ref rooms, allRoomsComplete, exitRoomX, exitRoomY, exitDoor); }
-
-                
             }
-
-            
 
             Vector2 p = Helper.RandomPointInCircle(Helper.PointOnCircle(ref v2pos, 1f, (Rotation - MathHelper.Pi) + 0.1f), 0f, 2f);
             ParticleController.Instance.Spawn(new Vector3(p, Position.Z-1f), new Vector3(0f, 0f, -0.01f - ((float)Helper.Random.NextDouble() * 0.01f)), 0.5f, Color.Black*0.2f, 2000, false);
@@ -134,7 +132,7 @@ namespace LD27
             drawEffect.View = gameCamera.viewMatrix;
             drawEffect.World = gameCamera.worldMatrix *
                                Matrix.CreateRotationX(MathHelper.PiOver2) *
-                               Matrix.CreateRotationZ(Rotation - MathHelper.PiOver2) *
+                               Matrix.CreateRotationZ((Rotation - MathHelper.PiOver2) + attackRotation) *
                                Matrix.CreateTranslation(new Vector3(0, 0, (-(spriteSheet.Z_SIZE * SpriteVoxel.HALF_SIZE)) + SpriteVoxel.HALF_SIZE)) *
                                Matrix.CreateScale(0.9f) *
                                Matrix.CreateTranslation(Position);
@@ -149,38 +147,71 @@ namespace LD27
                 if (attackTime >= attackTargetTime)
                 {
                     attackTime = 0;
-                    attackFrame+=attackDir;
+                    attackRotation = 0f;
+                    attacking = false;
+                    attackRecoveryTime = 200;
+                }
+                //attackFrame+=attackDir;
 
-                    if (attackFrame == 1 && attackDir == 1)
+                //if (attackFrame == 1 && attackDir == 1)
+                //{
+                //    bool hit = false;
+                //    float radiusSweep = 1f;
+                //    foreach (Enemy e in EnemyController.Instance.Enemies.Where(en => en.Room == currentRoom))
+                //    {
+                //        for (float az = 0f; az > -8f; az -= 1f)
+                //        {
+                //            for (float a = Rotation - radiusSweep; a < Rotation + radiusSweep; a += 0.02f)
+                //            {
+                //                for (float dist = 0f; dist < 5f; dist += 0.2f)
+                //                {
+                //                    Vector3 attackPos = new Vector3(Helper.PointOnCircle(ref v2pos, dist, Rotation), Position.Z + az);
+
+                //                    if (e.boundingSphere.Contains(attackPos) == ContainmentType.Contains && !hit)
+                //                    {
+                //                        e.DoHit(attackPos, new Vector3(Helper.AngleToVector(Rotation, 0.01f), 0f), 10f);
+                //                        hit = true;
+                //                    }
+                //                }
+                //            }
+                //        }
+                //    }
+
+                //}
+
+                //if (attackFrame == 3) { attackDir = -1; attackFrame = 1; }
+                //if (attackFrame == -1) { attackFrame = 0; attacking = false; }
+
+                attackRotation = (MathHelper.TwoPi / (float)attackTargetTime) * (float)attackTime;
+                attackFrame = 2;
+
+                
+                for (float az = 0f; az > -8f; az -= 1f)
+                {
+                    for (float dist = 0f; dist < 5f; dist += 0.2f)
                     {
-                        bool hit = false;
-                        float radiusSweep = 1f;
+                        Vector3 attackPos = new Vector3(Helper.PointOnCircle(ref v2pos, dist, Rotation + attackRotation), Position.Z + az);
+                        Vector3 particlePos = new Vector3(Helper.PointOnCircle(ref v2pos, dist, Rotation + (attackRotation - (0.3f + ((float)Helper.Random.NextDouble() * 0.6f)))), Position.Z - 5f);
+                        Vector3 nextPos = new Vector3(Helper.PointOnCircle(ref v2pos, dist, Rotation + (attackRotation)), Position.Z -5f);
+                        Vector3 pspeed = nextPos - particlePos;
+                        pspeed.Normalize();
+                        if(Helper.Random.Next(20)==1) ParticleController.Instance.Spawn(particlePos, pspeed*0.01f, 0.5f, Color.Cyan * 0.2f, 0, false);
+
                         foreach (Enemy e in EnemyController.Instance.Enemies.Where(en => en.Room == currentRoom))
                         {
-                            for (float az = 0f; az > -8f; az -= 1f)
+                            if (e.boundingSphere.Contains(attackPos) == ContainmentType.Contains)
                             {
-                                for (float a = Rotation - radiusSweep; a < Rotation + radiusSweep; a += 0.02f)
-                                {
-                                    for (float dist = 0f; dist < 5f; dist += 0.2f)
-                                    {
-                                        Vector3 attackPos = new Vector3(Helper.PointOnCircle(ref v2pos, dist, Rotation), Position.Z + az);
-
-                                        if (e.boundingSphere.Contains(attackPos) == ContainmentType.Contains && !hit)
-                                        {
-                                            e.DoHit(attackPos, new Vector3(Helper.AngleToVector(Rotation, 0.01f), 0f), 10f);
-                                            hit = true;
-                                        }
-                                    }
-                                }
+                                e.DoHit(attackPos, new Vector3(Helper.AngleToVector(Rotation + attackRotation, 1f), 0f), 10f);
                             }
                         }
-
                     }
-
-                    if (attackFrame == 3) { attackDir = -1; attackFrame = 1; }
-                    if (attackFrame == -1) { attackFrame = 0; attacking = false; }
-
                 }
+                
+            }
+            else
+            {
+                attackRecoveryTime -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                attackFrame = 0;
             }
 
             if (hitAlpha > 0f) hitAlpha -= 0.1f;
@@ -262,7 +293,7 @@ namespace LD27
 
         public void DoAttack()
         {
-            if (!introTargetReached || Dead || attacking || defending) return;
+            if (!introTargetReached || Dead || attacking || defending || attackRecoveryTime>0) return;
 
             attacking = true;
             attackFrame = 0;
@@ -393,7 +424,7 @@ namespace LD27
         void CheckCollisions(VoxelWorld world, List<Door> doors, Room currentRoom)
         {
             float checkRadius = 3.5f;
-            float radiusSweep = 0.75f;
+            float radiusSweep = 0.2f;
             Vector2 v2Pos = new Vector2(Position.X, Position.Y);
             float checkHeight = Position.Z - 1f;
             Voxel checkVoxel;

@@ -35,6 +35,7 @@ namespace LD27
         public BoundingSphere boundingSphere = new BoundingSphere();
 
         public double knockbackTime = 0;
+        public Vector3 knockbackSpeed;
 
         public bool attacking = false;
         public double attackTime = 0;
@@ -98,9 +99,12 @@ namespace LD27
 
         public virtual void DoHit(Vector3 attackPos, Vector3 speed, float damage)
         {
-            hitAlpha = 1f;
+            if (hitAlpha <= 0f)
+            {
+                hitAlpha = 1f;
 
-            Health -= damage;
+                Health -= damage;
+            }
         }
 
         public virtual void DoCollide(bool x, bool y, bool z, Vector3 checkPosition, Room currentRoom, Hero gameHero, bool withPlayer)

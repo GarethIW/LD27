@@ -64,8 +64,17 @@ namespace LD27
 
         }
 
+        public override void Die()
+        {
+            ParticleController.Instance.SpawnExplosion(Position);
+            AudioController.PlaySFX("explosion2");
+            base.Die();
+        }
+
         public override void DoHit(Vector3 attackPos, Vector3 speed, float damage)
         {
+            if (hitAlpha > 0f) return;
+
             Speed.X = speed.X;
             Speed.Y = speed.Y;
 
@@ -75,10 +84,13 @@ namespace LD27
                 ParticleController.Instance.Spawn(Position, new Vector3(-0.1f + ((float)Helper.Random.NextDouble() * 0.2f), -0.1f + ((float)Helper.Random.NextDouble() * 0.2f), -0.1f + ((float)Helper.Random.NextDouble() * 0.2f)), 0.25f, c, 1000, true);                
             }
 
-            knockbackTime = 2000;
+            knockbackTime = 1000;
+            //knockbackSpeed = speed;
             //base.DoHit(attackPos, vector3, p);
 
             Health -= damage;
+
+            AudioController.PlaySFX("metal_hit", 0.6f, -0.2f, 0.2f);
 
             hitAlpha = 1f;
         }

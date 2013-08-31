@@ -178,6 +178,41 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
+    <Compile Include="audio\sfx\complete.wav">
+      <Name>complete</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="audio\sfx\exit_open.wav">
+      <Name>exit_open</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="audio\sfx\ooze_hit.wav">
+      <Name>ooze_hit</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="audio\sfx\room_clear.wav">
+      <Name>room_clear</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="audio\sfx\sentinel_die.wav">
+      <Name>sentinel_die</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="roomsinfestedlarge.png">
+      <Name>roomsinfestedlarge</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="roomsinfestedsmall.png">
+      <Name>roomsinfestedsmall</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Content Include="tiles.vxs">
       <Name>tiles</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -256,6 +291,20 @@
   <ItemGroup>
     <Compile Include="timerfont-large.spritefont">
       <Name>timerfont-large</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="infestedfont-large.spritefont">
+      <Name>infestedfont-large</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="infestedfont-small.spritefont">
+      <Name>infestedfont-small</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>

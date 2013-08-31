@@ -43,6 +43,10 @@ namespace LD27
         Texture2D texTitle;
         Texture2D texTitleBG;
         Texture2D texStingers;
+        Texture2D texInfestedLarge;
+        Texture2D texInfestedSmall;
+        SpriteFont infestedFontLarge;
+        SpriteFont infestedFontSmall;
 
         MouseState lms;
         KeyboardState lks;
@@ -80,6 +84,11 @@ namespace LD27
         bool shownComplete = false;
         double showCompleteTime = 0;
         float showCompleteAlpha = 0f;
+
+        double roomClearTime = 0;
+        Vector2 roomClearPos;
+        float roomClearAlpha;
+        int prevRoomInfested = 0;
 
         bool firstRun = true;    
 
@@ -161,6 +170,9 @@ namespace LD27
             shownComplete = false;
             showCompleteTime = 0;
             showCompleteAlpha = 0f;
+            prevRoomInfested = 0;
+            roomClearAlpha = 0f;
+            roomClearTime = 0;
 
             Doors.Clear();
             Doors.Add(new Door(VoxelWorld.ToScreenSpace((7 * 16) + 7, 7, 21) + new Vector3(Voxel.HALF_SIZE,Voxel.HALF_SIZE,Voxel.HALF_SIZE), 0, doorSheet));
@@ -178,6 +190,10 @@ namespace LD27
                 font = Content.Load<SpriteFont>("font");
                 timerFontLarge = Content.Load<SpriteFont>("timerfont-large");
                 timerFontSmall = Content.Load<SpriteFont>("timerfont-small");
+                texInfestedLarge = Content.Load<Texture2D>("roomsinfestedlarge");
+                texInfestedSmall = Content.Load<Texture2D>("roomsinfestedsmall");
+                infestedFontSmall = Content.Load<SpriteFont>("infestedfont-small");
+                infestedFontLarge = Content.Load<SpriteFont>("infestedfont-large");
             }
 
             firstRun = false;
@@ -204,6 +220,14 @@ namespace LD27
 
             if (generatedPercent >= 100)
             {
+                
+                if (!this.IsActive)
+                {
+                    drawEffect.View = gameCamera.viewMatrix;
+                    drawEffect.World = gameCamera.worldMatrix;
+                    return;
+                }
+
                 MouseState cms = Mouse.GetState();
                 KeyboardState cks = Keyboard.GetState();
                 GamePadState cgs = GamePad.GetState(PlayerIndex.One);
@@ -310,11 +334,11 @@ namespace LD27
                 foreach (Room r in Rooms)
                     if (r.World != null) r.World.Update(gameTime, gameCamera, currentRoom == r);
                 //currentRoom.World.Update(gameTime, gameCamera);
-
+                
                 gameHero.Update(gameTime, gameCamera, currentRoom, Doors, ref Rooms, allRoomsComplete, exitRoomX, exitRoomY, exitDoor);
                 currentRoom = Rooms[gameHero.RoomX, gameHero.RoomY];
                 currentRoom.Update(gameTime);
-
+                
                 enemyController.Update(gameTime, gameCamera, currentRoom, gameHero, Doors);
                 particleController.Update(gameTime, gameCamera, currentRoom.World);
                 pickupController.Update(gameTime, gameCamera, gameHero, currentRoom);
@@ -343,11 +367,41 @@ namespace LD27
 
                 }
 
+                int roomsInfested = 0;
+                foreach (Room r in Rooms) if (!r.IsComplete) roomsInfested++;
+
+                if (roomsInfested < prevRoomInfested && roomsInfested > 0)
+                {
+                    roomClearTime = 2000;
+                    roomClearAlpha = 1f;
+                    roomClearPos = new Vector2(GraphicsDevice.Viewport.Width / 2, 200);
+                }
+
+                if (roomClearTime > 0)
+                {
+                    roomClearTime -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                }
+                else
+                {
+                    if (roomClearAlpha > 0f)
+                    {
+                        roomClearAlpha -= 0.025f;
+                        roomClearPos = Vector2.Lerp(roomClearPos, Vector2.Zero, 0.025f);
+                    }
+                }
+
+                prevRoomInfested = 0;
                 allRoomsComplete = true;
-                foreach (Room r in Rooms) if (!r.IsComplete) allRoomsComplete = false;
+                foreach (Room r in Rooms) 
+                    if (!r.IsComplete)
+                    {
+                        prevRoomInfested++;
+                        allRoomsComplete = false;
+                    }
 
                 if (allRoomsComplete && !shownComplete)
                 {
+                    if (showCompleteTime == 0) AudioController.PlaySFX("exit_open", 1f, 0f, 0f);
                     if (gameHero.RoomX == exitRoomX && gameHero.RoomY == exitRoomY && roomState == RoomState.DoorsOpen) exitDoor.Open(false);
                     if(showCompleteAlpha<1f) showCompleteAlpha += 0.1f;
                     showCompleteTime += gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -372,9 +426,11 @@ namespace LD27
                     titleCurrentFrame++;
                     if (titleCurrentFrame == 4) titleCurrentFrame = 0;
                 }
-                titleScrollPos += Vector2.One;
-                if (titleScrollPos.X == texTitleBG.Width) titleScrollPos = Vector2.Zero;
+                titleScrollPos += new Vector2(-1f,1f);
+                if (titleScrollPos.X == -texTitleBG.Width) titleScrollPos = Vector2.Zero;
             }
+
+
 
             base.Update(gameTime);
         }
@@ -390,8 +446,8 @@ namespace LD27
             if (generatedPercent < 100)
             {
                 spriteBatch.Begin();
-                for(int x=0;x<4;x++)
-                    for (int y = 0; y < 3; y++)
+                for(int x=-3;x<4;x++)
+                    for (int y = -2; y < 3; y++)
                     {
                         spriteBatch.Draw(texTitleBG, -titleScrollPos + (new Vector2(x * texTitleBG.Width, y * texTitleBG.Height)), null, Color.White);
                     }
@@ -482,6 +538,11 @@ namespace LD27
 
             }
 
+            int roomsInfested = 0;
+            foreach(Room r in Rooms) if(!r.IsComplete) roomsInfested++;
+            spriteBatch.Draw(texInfestedSmall, new Vector2(5, 5), null, Color.White);
+            spriteBatch.DrawString(infestedFontSmall, roomsInfested.ToString("00"), new Vector2(60, 50), Color.White, 0f, infestedFontSmall.MeasureString(roomsInfested.ToString("00"))/2, 1f, SpriteEffects.None,1);
+
             if (showCompleteAlpha > 0f)
             {
                 if (allRoomsComplete && !gameHero.exitReached)
@@ -490,6 +551,13 @@ namespace LD27
                     spriteBatch.Draw(texStingers, new Vector2(GraphicsDevice.Viewport.Width / 2, 200), new Rectangle(413, 0, 413, 362), Color.White * showCompleteAlpha, 0f, new Vector2(413, 362) / 2, 1f, SpriteEffects.None, 1);
                 else if (gameHero.Dead)
                     spriteBatch.Draw(texStingers, new Vector2(GraphicsDevice.Viewport.Width / 2, 200), new Rectangle(413 * 2, 0, 413, 362), Color.White * showCompleteAlpha, 0f, new Vector2(413, 362) / 2, 1f, SpriteEffects.None, 1);
+
+            }
+
+            if (roomClearAlpha > 0f)
+            {
+                spriteBatch.Draw(texInfestedLarge, roomClearPos, null, Color.White * roomClearAlpha, 0f, new Vector2(texInfestedLarge.Width, texInfestedLarge.Height)/2, roomClearAlpha, SpriteEffects.None, 1);
+                spriteBatch.DrawString(infestedFontLarge, roomsInfested.ToString("00"), roomClearPos + (new Vector2(-140f, -90f)* roomClearAlpha), Color.White * roomClearAlpha, 0f, infestedFontSmall.MeasureString(roomsInfested.ToString("00")) / 2, roomClearAlpha, SpriteEffects.None, 1);
 
             }
 
@@ -652,6 +720,7 @@ namespace LD27
             currentRoom = Rooms[gameHero.RoomX, gameHero.RoomY];
 
             enemyController.Enemies.RemoveAll(en => en.Room == currentRoom);
+            currentRoom.IsComplete = true;
 
             gameCamera.Position = new Vector3((currentRoom.World.X_SIZE * Voxel.SIZE) / 2, (currentRoom.World.Y_SIZE * Voxel.SIZE) / 2, 0f);
             gameCamera.Target = new Vector3((currentRoom.World.X_SIZE * Voxel.SIZE) / 2, (currentRoom.World.Y_SIZE * Voxel.SIZE) / 2, 0f);

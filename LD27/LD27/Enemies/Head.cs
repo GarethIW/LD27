@@ -33,7 +33,7 @@ namespace LD27
 
             numAttackFrames = 7;
 
-            Health = 500f;
+            Health = 300f;
         }
 
         public override void Update(GameTime gameTime, Room currentRoom, Hero gameHero, List<Door> doors)
@@ -121,6 +121,7 @@ namespace LD27
 
         public override void DoHit(Vector3 attackPos, Vector3 speed, float damage)
         {
+            if (hitAlpha > 0f) return;
 
             for (int i = 0; i < 4; i++)
             {
@@ -135,6 +136,7 @@ namespace LD27
 
             Health -= damage;
 
+            AudioController.PlaySFX("face_die", 0.5f, -0.2f, 0.2f);
 
         }
 

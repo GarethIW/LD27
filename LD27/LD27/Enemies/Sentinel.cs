@@ -32,7 +32,6 @@ namespace LD27
 
             if (attacking)
             {
-                Speed = Vector3.Zero;
                 Rotation = Helper.TurnToFace(new Vector2(Position.X, Position.Y), new Vector2(gameHero.Position.X, gameHero.Position.Y), Rotation, 1f, 0.5f);
 
                 attackTime += gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -51,13 +50,33 @@ namespace LD27
                     if (attackFrame == numAttackFrames-1) { attackDir = -1; attackFrame = numAttackFrames-2; }
                     if (attackFrame == -1) { attackFrame = 0; if (Vector3.Distance(Position, gameHero.Position) >= 30f) attacking = false; attackDir = 1; }
                 }
+
+                if (knockbackTime > 0)
+                {
+                    Speed = knockbackSpeed;
+                    knockbackSpeed = Vector3.Lerp(knockbackSpeed, Vector3.Zero, 0.1f);
+                    CheckCollisions(Room.World, doors, currentRoom, gameHero);
+                    Position += Speed;
+                }
+                else Speed = Vector3.Zero;
+
+                if (knockbackTime > 0) knockbackTime -= gameTime.ElapsedGameTime.TotalMilliseconds;
+   
             }
             else
             {
                 Vector3 dir = Target - Position;
-                if (dir.Length() > 0f)
-                    dir.Normalize();
-                Speed = dir * 0.2f;
+                if (knockbackTime <= 0)
+                {
+                    if (dir.Length() > 0f)
+                        dir.Normalize();
+                    Speed = dir * 0.2f;
+                }
+                else
+                {
+                    Speed = knockbackSpeed;
+                    knockbackSpeed = Vector3.Lerp(knockbackSpeed, Vector3.Zero, 0.1f);
+                }
 
                 if (Vector3.Distance(Position, Target) <= 1f) Target = Position + (new Vector3(Helper.AngleToVector(((Rotation + MathHelper.Pi) - MathHelper.PiOver2) + ((float)Helper.Random.NextDouble() * MathHelper.Pi), 100f), 0f));
 
@@ -73,13 +92,33 @@ namespace LD27
                 if (Room.World.GetVoxel(new Vector3(Position.X, Position.Y, z)).Active) { groundHeight = z; break; }
             }
 
+
+
             if (hitAlpha > 0f) hitAlpha -= 0.1f;
 
             if (Health <= 0f) Die();
         }
 
+        public override void Die()
+        {
+            AudioController.PlaySFX("sentinel_die", 0.5f, -0.1f, 0.1f);
+            ParticleController.Instance.SpawnExplosion(Position);
+            AudioController.PlaySFX("explosion2");
+            base.Die();
+        }
+
         public override void DoHit(Vector3 attackPos, Vector3 speed, float damage)
         {
+            if (hitAlpha > 0f) return;
+
+            knockbackSpeed.X = speed.X;
+            knockbackSpeed.Y = speed.Y;
+            knockbackTime = 1000;
+
+            //attacking = false;
+            //attackFrame = 0;
+            //attackTime = 0;
+
             for (int i = 0; i < 6; i++)
             {
                 Color c = new Color(new Vector3(1.0f, (float)Helper.Random.NextDouble(), 0.0f)) * (0.7f + ((float)Helper.Random.NextDouble() * 0.3f));
@@ -90,17 +129,20 @@ namespace LD27
 
             Health -= damage;
 
+            AudioController.PlaySFX("metal_hit", 0.6f, -0.2f, 0.2f);
+
         }
 
         public override void DoCollide(bool x, bool y, bool z, Vector3 checkPosition, Room currentRoom, Hero gameHero, bool withPlayer)
         {
            // Target = new Vector3(Helper.Random.Next(Room.World.X_SIZE) * Voxel.SIZE, Helper.Random.Next(Room.World.Y_SIZE) * Voxel.SIZE, Position.Z);
-
-            Target = Position + (new Vector3(Helper.AngleToVector(((Rotation+MathHelper.Pi) - MathHelper.PiOver2) + ((float)Helper.Random.NextDouble()*MathHelper.Pi), 100f), 0f)); //new Vector3(Helper.Random.Next(Room.World.X_SIZE) * Voxel.SIZE, Helper.Random.Next(Room.World.Y_SIZE) * Voxel.SIZE, Position.Z);  //Position + (-Speed * 100f);
+            knockbackTime = 0;
+            Target = Position + (new Vector3(Helper.AngleToVector(((Rotation + MathHelper.Pi) - MathHelper.PiOver2) + ((float)Helper.Random.NextDouble() * MathHelper.Pi), 100f), 0f)); //new Vector3(Helper.Random.Next(Room.World.X_SIZE) * Voxel.SIZE, Helper.Random.Next(Room.World.Y_SIZE) * Voxel.SIZE, Position.Z);  //Position + (-Speed * 100f);
             Vector3 dir = Target - Position;
             if (dir.Length() > 0f)
                 dir.Normalize();
             Speed = dir * 0.2f;
+            
 
             base.DoCollide(x, y, z, checkPosition, currentRoom, gameHero, withPlayer);
         }

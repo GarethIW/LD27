@@ -45,13 +45,21 @@ namespace LD27
             if (wallGlow < -0.29f) wallGlowTarget = 0.3f;
             if (wallGlow > 0.29f) wallGlowTarget = -0.3f;
 
-            if(!IsComplete)
+            if (!IsComplete)
+            {
                 wallColor = new Color(0.7f + wallGlow, 0f, 0f);
+            }
             else
+            {
                 wallColor = new Color(0f, 0.7f + wallGlow, 0f);
+            }
 
 
-            if (EnemyController.Instance.Enemies.Count(en => en.Room == this) == 0) IsComplete = true;
+            if (EnemyController.Instance.Enemies.Count(en => en.Room == this) == 0 && !IsComplete)
+            {
+                IsComplete = true;
+                AudioController.PlaySFX("room_clear", 1f, 0f, 0f);
+            }
         }
 
         public void Draw(GraphicsDevice gd, Camera gameCamera, BasicEffect drawEffect)
@@ -142,7 +150,13 @@ namespace LD27
             int enemiesSpawned = 0;
             bool headSpawned = false;
             bool oozeSpawned = false;
-            int numEnemies = 0 + Helper.Random.Next(6);
+            int numEmptyRooms = 3;
+            int numEnemies = 1 + Helper.Random.Next(6);
+            if (Helper.Random.Next(10) == 1)
+            {
+                numEnemies = 0;
+                IsComplete = true;
+            }
             while (enemiesSpawned < numEnemies)
             {
                 for (int x = 1; x < 14; x++)

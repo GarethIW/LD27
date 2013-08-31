@@ -24,6 +24,11 @@ namespace LD27
 
         BasicEffect drawEffect;
 
+        double updateTime = 0;
+        double updateTargetTime = 0;
+
+        int parts = 0;
+
         public ParticleController(GraphicsDevice gd)
         {
             Instance = this;
@@ -42,14 +47,23 @@ namespace LD27
 
         public void Update(GameTime gameTime, Camera gameCamera, VoxelWorld gameWorld)
         {
-            int parts = 0;
+            
             foreach (Particle p in Particles.Where(part => part.Active))
             {
                 p.Update(gameTime, gameWorld);
+            }
 
-                ParticleCube.Create(ref verts, ref indexes, p.Position, parts, p.Scale/2, p.Color);
+            updateTime += gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (updateTime >= updateTargetTime)
+            {
+                updateTime = 0;
 
-                parts++;
+                parts = 0;
+                foreach (Particle p in Particles.Where(part => part.Active))
+                {
+                    ParticleCube.Create(ref verts, ref indexes, p.Position, parts, p.Scale / 2, p.Color);
+                    parts++;
+                }
             }
 
             currentParticleCount = Particles.Count(part => part.Active);

@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LD27</RootNamespace>
-    <AssemblyName>LD27</AssemblyName>
+    <AssemblyName>SpatiumSecondorumDecem</AssemblyName>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -371,6 +371,42 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\complete.xnb">
+      <Link>Content\audio\sfx\complete.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\exit_open.xnb">
+      <Link>Content\audio\sfx\exit_open.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\ooze_hit.xnb">
+      <Link>Content\audio\sfx\ooze_hit.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\room_clear.xnb">
+      <Link>Content\audio\sfx\room_clear.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\audio\sfx\sentinel_die.xnb">
+      <Link>Content\audio\sfx\sentinel_die.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\infestedfont-large.xnb">
+      <Link>Content\infestedfont-large.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\infestedfont-small.xnb">
+      <Link>Content\infestedfont-small.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\roomsinfestedlarge.xnb">
+      <Link>Content\roomsinfestedlarge.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\roomsinfestedsmall.xnb">
+      <Link>Content\roomsinfestedsmall.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

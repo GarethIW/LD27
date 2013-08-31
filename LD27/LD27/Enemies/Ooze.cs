@@ -31,9 +31,18 @@ namespace LD27
             if (currentRoom != Room) return;
 
             Vector3 dir = Target - Position;
-            if (dir.Length() > 0f)
-                dir.Normalize();
-            Speed = dir * 0.05f;
+
+            if (knockbackTime <= 0)
+            {
+                if (dir.Length() > 0f)
+                    dir.Normalize();
+                Speed = dir * 0.05f;
+            }
+            else
+            {
+                Speed = knockbackSpeed;
+                knockbackSpeed = Vector3.Lerp(knockbackSpeed, Vector3.Zero, 0.1f);
+            }
 
             if (Vector3.Distance(Position, Target) <= 1f) Target = Position + (new Vector3(Helper.AngleToVector(((Rotation + MathHelper.Pi) - MathHelper.PiOver2) + ((float)Helper.Random.NextDouble() * MathHelper.Pi), 100f), 0f));
 
@@ -73,6 +82,11 @@ namespace LD27
 
         public override void DoHit(Vector3 attackPos, Vector3 speed, float damage)
         {
+            if (hitAlpha > 0f) return;
+
+            knockbackSpeed.X = speed.X;
+            knockbackSpeed.Y = speed.Y;
+            knockbackTime = 1000;
 
             for (int i = 0; i < 4; i++)
             {
@@ -83,6 +97,7 @@ namespace LD27
 
 
             Health -= damage;
+            AudioController.PlaySFX("ooze_hit", 0.5f, -0.2f, 0.2f);
 
 
         }
@@ -91,7 +106,7 @@ namespace LD27
         {
             if (Iteration < 2)
             {
-                AudioController.PlaySFX("ooze_split", 1f, 0f, 0f);
+                AudioController.PlaySFX("ooze_split", 0.6f, 0f, 0f);
 
                 for (int i = 0; i <3; i++)
                 {
@@ -99,7 +114,7 @@ namespace LD27
                     EnemyController.Instance.SpawnOoze(Position + new Vector3(0f,0f, height*(0.2f * (Iteration+1))), Room, Iteration + 1, groundHeight);
                 }
             }
-            else  AudioController.PlaySFX("ooze_die", 1f, 0f, 0f);
+            else  AudioController.PlaySFX("ooze_die", 0.5f, -0.2f, 0.2f);
             
             base.Die();
         }

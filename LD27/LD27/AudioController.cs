@@ -64,6 +64,11 @@ namespace LD27
             effects.Add("deflect", content.Load<SoundEffect>("audio/sfx/deflect"));
             effects.Add("gatling_deflect", content.Load<SoundEffect>("audio/sfx/gatling_deflect"));
             effects.Add("player_hit", content.Load<SoundEffect>("audio/sfx/flesh_hit"));
+            effects.Add("ooze_hit", content.Load<SoundEffect>("audio/sfx/ooze_hit"));
+            effects.Add("sentinel_die", content.Load<SoundEffect>("audio/sfx/sentinel_die"));
+            effects.Add("room_clear", content.Load<SoundEffect>("audio/sfx/room_clear"));
+            effects.Add("exit_open", content.Load<SoundEffect>("audio/sfx/exit_open"));
+            effects.Add("complete", content.Load<SoundEffect>("audio/sfx/complete"));
 
             instances = new Dictionary<string, SoundEffectInstance>();
             instances.Add("roomscrape", effects["roomscrape"].CreateInstance());
@@ -108,7 +113,7 @@ namespace LD27
         {
             playingTrack = track;
             isPlaying = true;
-            songs[track].IsLooped = true;
+            if(!songs[track].IsLooped) songs[track].IsLooped = true;
             songs[track].Volume = 0f;
             songs[track].Play();
         }
@@ -171,10 +176,10 @@ namespace LD27
             if (playingTrack == "") return;
 
             if(isPlaying)
-                if (songs[playingTrack].Volume < musicvolume) songs[playingTrack].Volume += 0.01f;
+                if (songs[playingTrack].Volume < musicvolume) songs[playingTrack].Volume=MathHelper.Clamp(songs[playingTrack].Volume + 0.01f, 0f, 1f);
 
              if (!isPlaying)
-                 if (songs[playingTrack].Volume > 0) songs[playingTrack].Volume -= 0.01f;
+                 if (songs[playingTrack].Volume > 0) songs[playingTrack].Volume = MathHelper.Clamp(songs[playingTrack].Volume-0.01f,0f,1f);
                  else songs[playingTrack].Stop();
 
             // if (MediaPlayer.Volume > musicvolume) MediaPlayer.Volume = musicvolume;
