@@ -41,7 +41,8 @@ namespace LD27
 
         bool attacking = false;
         double attackTime = 0;
-        double attackTargetTime = 50;
+        double attackTargetTime = 500;
+        float attackRotation = 0f;
         int attackDir;
         int attackFrame = 0;
 
