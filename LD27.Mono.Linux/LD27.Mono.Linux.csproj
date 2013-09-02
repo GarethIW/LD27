@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <ApplicationIcon>SSD.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\LD27\LD27\AudioController.cs">
@@ -153,8 +153,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
+    <Content Include="SSD.ico" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\music\game.xnb">
       <Link>Content\audio\music\game.xnb</Link>
@@ -180,6 +180,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\complete.xnb">
+      <Link>Content\audio\sfx\complete.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\defend.xnb">
       <Link>Content\audio\sfx\defend.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -194,6 +200,12 @@
   <ItemGroup>
     <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\door.xnb">
       <Link>Content\audio\sfx\door.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\exit_open.xnb">
+      <Link>Content\audio\sfx\exit_open.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -258,6 +270,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\ooze_hit.xnb">
+      <Link>Content\audio\sfx\ooze_hit.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\ooze_spit.xnb">
       <Link>Content\audio\sfx\ooze_spit.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -276,6 +294,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\room_clear.xnb">
+      <Link>Content\audio\sfx\room_clear.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\roomclunk.xnb">
       <Link>Content\audio\sfx\roomclunk.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -288,6 +312,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\sentinel_die.xnb">
+      <Link>Content\audio\sfx\sentinel_die.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\sentinel_shoot.xnb">
       <Link>Content\audio\sfx\sentinel_shoot.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -296,6 +326,24 @@
   <ItemGroup>
     <Content Include="..\ld27\ld27\bin\x86\debug\content\audio\sfx\sword.xnb">
       <Link>Content\audio\sfx\sword.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\door.vxs">
+      <Link>Content\door.vxs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\dude.vxs">
+      <Link>Content\dude.vxs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\dynamic.vxs">
+      <Link>Content\dynamic.vxs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -324,55 +372,85 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\door.vxs">
-      <Link>Content\door.vxs</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\dude.vxs">
-      <Link>Content\dude.vxs</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\dynamic.vxs">
-      <Link>Content\dynamic.vxs</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\font.xnb">
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\font.xnb">
       <Link>Content\font.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\hud.xnb">
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\hud.xnb">
       <Link>Content\hud.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\projectiles.vxs">
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\infestedfont-large.xnb">
+      <Link>Content\infestedfont-large.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\infestedfont-small.xnb">
+      <Link>Content\infestedfont-small.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\projectiles.vxs">
       <Link>Content\projectiles.vxs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\roomicon.xnb">
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\roomicon.xnb">
       <Link>Content\roomicon.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\stingers.xnb">
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\roomsinfestedlarge.xnb">
+      <Link>Content\roomsinfestedlarge.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\roomsinfestedsmall.xnb">
+      <Link>Content\roomsinfestedsmall.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\stingers.xnb">
       <Link>Content\stingers.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\tiles.vxs">
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\tiles.vxs">
       <Link>Content\tiles.vxs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\timerfont-large.xnb">
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\timerfont-large.xnb">
       <Link>Content\timerfont-large.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\timerfont-small.xnb">
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\timerfont-small.xnb">
       <Link>Content\timerfont-small.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\title-bg.xnb">
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\title-bg.xnb">
       <Link>Content\title-bg.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\LD27\LD27\bin\x86\Debug\Content\titlesheet.xnb">
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ld27\ld27\bin\x86\debug\content\titlesheet.xnb">
       <Link>Content\titlesheet.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
